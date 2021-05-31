@@ -1,0 +1,17 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .sm-link {
+    font-size: small;
+    position: relative;
+    left: 10px;
+    color: white;
+  }
+
+  #logo {
+    background-image: url("src\assets\img\clipart358426.png");
+    background-size: contain;
+    height: 40px;
+    width: 40px;
+  }

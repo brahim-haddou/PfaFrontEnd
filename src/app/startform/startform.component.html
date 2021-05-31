@@ -1,0 +1,13 @@
+<div class="body">
+    <mat-label>Time Table Name</mat-label>
+    <input matInput>
+    <mat-form-field appearance="fill">
+        <mat-label>Choix de filiere</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="accent" routerLink="build" [mat-dialog-close]="true" >Start building</button>
+</div>

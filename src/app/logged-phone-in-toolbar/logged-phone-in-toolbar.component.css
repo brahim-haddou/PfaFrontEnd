@@ -1,0 +1,43 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+  .sm-link {
+    font-size: small;
+    position: relative;
+    left: 0x;
+    color: white;
+  }
+
+  #avatar {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+    border-radius: 50%;
+  }
+
+  #logo {
+    background-image: url("src\assets\img\clipart358426.png");
+    background-size: contain;
+    height: 40px;
+    width: 40px;
+  }
+
+  #newtt {
+    margin-right: 70px;
+    margin-left: 20px;
+  }
+  
+  .modified-mc-content {
+    height: 48px;
+  }
+
+  .modified-mc-content > mat-expansion-panel {
+    z-index: 2;
+    background-color: #3f51b5;
+    padding: 0;
+}
+
+.modified-mc-content > mat-expansion-panel > .mat-expansion-panel-content {
+  overflow: auto;
+  padding: 0;
+}

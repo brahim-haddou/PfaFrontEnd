@@ -1,0 +1,24 @@
+<mat-drawer-container class="body" [hasBackdrop]="true">
+    <mat-drawer #sidenav id="drawer">
+        <div class="header">
+            <div id="header-top">
+                <button class="openclose-drawer-fab" mat-fab color="primary" aria-label="Open/Close" (click)="sidenav.toggle()">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>
+            </div>
+            <div id="header-bot"></div>
+        </div>
+        <div class="container">
+            <button class="nav-button" mat-stroked-button color="primary">Filiere</button>
+            <button class="nav-button" mat-stroked-button color="primary" routerLink="prof" routerLinkActive="active">Professeur</button>
+            <button class="nav-button" mat-stroked-button color="primary" routerLink="module" routerLinkActive="active">Salle</button>
+            <button class="nav-button" mat-stroked-button color="primary">Creneau</button>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <div class="body">
+            <router-outlet></router-outlet>
+        </div>
+        <button mat-raised-button color="warn" classe="start" (click)="openLoginDialog()">Start</button>
+    </mat-drawer-content>
+</mat-drawer-container>

@@ -1,0 +1,10 @@
+.side-bar{
+    height: 100%;
+    width: 20vw;
+    min-width: 300px;
+    border-right: 1px black solid;
+}
+.body{
+    height: 91vh;
+    width: 100vh;
+}

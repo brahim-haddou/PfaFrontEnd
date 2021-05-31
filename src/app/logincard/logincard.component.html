@@ -1,0 +1,49 @@
+<div mat-dialog-content>
+    <mat-tab-group dynamicHeight mat-stretch-tabs mat-align-tabs="center">
+        <mat-tab label="Sign in">
+            <h1>Sign in</h1>
+            <div class="container">
+                <mat-form-field class="field" appearance="standard" floatLabel="always">
+                    <mat-label>Email Adress</mat-label>
+                    <input matInput type="email" placeholder="Type your Email">
+                    <mat-icon matPrefix>alternate_email</mat-icon>
+                </mat-form-field>
+                <mat-form-field class="field" appearance="standard" floatLabel="always">
+                    <mat-icon matPrefix>lock</mat-icon>
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" placeholder="Type your Password">
+                </mat-form-field>
+                <div id="passforget" class="field"><a href="https://www.google.com/" target="_blank">Forgot Password ?</a></div>
+                <button mat-flat-button color="accent" class="field">Sign in</button>
+            </div>
+        </mat-tab>
+        <mat-tab label="Sign up">
+            <h1>Sign up</h1>
+            <div class="container">
+                <mat-form-field class="nameField" appearance="standard">
+                    <mat-label>First Name</mat-label>
+                    <input matInput placeholder="Enter your First Name">
+                </mat-form-field>
+                <mat-form-field class="nameField" appearance="standard">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput placeholder="Enter your Last Name">
+                </mat-form-field>
+                <mat-form-field class="field" appearance="standard">
+                    <mat-label>Email Adress</mat-label>
+                    <input matInput type="email" placeholder="Enter your Email Adress">
+                    <mat-hint>example@email.com</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="field" appearance="standard">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" placeholder="Enter your Password">
+                </mat-form-field>
+                <mat-form-field class="field" appearance="standard">
+                    <mat-label>Confirm your Password</mat-label>
+                    <input matInput type="password" placeholder="Re-enter your Password">
+                </mat-form-field>
+                <button mat-flat-button color="accent" class="field">Sign up</button>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+      
+</div>
