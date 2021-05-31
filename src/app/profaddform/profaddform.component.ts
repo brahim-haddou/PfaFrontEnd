@@ -5,7 +5,7 @@ import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/a
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { Module } from '../DBModels/module.model';
+import { Prof } from '../DBModels/prof.model';
 
 @Component({
   selector: 'app-profaddform',
@@ -19,12 +19,12 @@ export class ProfaddformComponent {
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   objectCtrl = new FormControl();
-  filteredobjects: Observable<Module[]>;
-  objects: Module[] = [{name : 'element0', isSelected : {completed: false}}];
-  allobjects: Module[] = [
-    {name : 'omar', isSelected : {completed: false}},
-    {name : 'heddi', isSelected : {completed: false}},
-    {name : 'ossaa', isSelected : {completed: false}}
+  filteredobjects: Observable<Prof[]>;
+  objects: Prof[] = [{id : 0 , name : 'element0', hour_count : 0 , isSelected : {completed: false}}];
+  allobjects: Prof[] = [
+    {id : 0 , name : 'element0', hour_count : 0 , isSelected : {completed: false}},
+    {id : 0 , name : 'element0', hour_count : 0 , isSelected : {completed: false}},
+    {id : 0 , name : 'element0', hour_count : 0 , isSelected : {completed: false}}
   ];
 
   @ViewChild('objectInput') objectInput!: ElementRef<HTMLInputElement>;
@@ -41,7 +41,7 @@ export class ProfaddformComponent {
 
     // Add our object
     if (value) {
-      this.objects.push({name : value, isSelected : {completed: false}});
+      this.objects.push({id : 0 , name : 'element0', hour_count : 0 , isSelected : {completed: false}});
     }
 
     // Clear the input value
@@ -50,7 +50,7 @@ export class ProfaddformComponent {
     this.objectCtrl.setValue(null);
   }
 
-  remove(object: Module): void {
+  remove(object: Prof): void {
     const index = this.objects.indexOf(object);
 
     if (index >= 0) {
@@ -59,12 +59,12 @@ export class ProfaddformComponent {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.objects.push({name :event.option.viewValue, isSelected : {completed: false}});
+    this.objects.push({id : 0 , name : 'element0', hour_count : 0 , isSelected : {completed: false}});
     this.objectInput.nativeElement.value = '';
     this.objectCtrl.setValue(null);
   }
 
-  private _filter(value: string): Module[] {
+  private _filter(value: string): Prof[] {
     const filterValue = value.toLowerCase();
 
     return this.allobjects.filter(object => object.name.toLowerCase().indexOf(filterValue) === 0);

@@ -13,9 +13,9 @@ import { ProfaddformComponent } from '../profaddform/profaddform.component';
 export class DataprofComponent implements OnInit, AfterViewInit {
 
   elementList: Prof[] = [
-    {name : 'element1', hour_count : 0,isSelected : {completed: false}},
-    {name : 'element2', hour_count : 0, isSelected : {completed: false}},
-    {name : 'element3', hour_count : 0, isSelected : {completed: false}}
+    {id : 0, name : 'element1', hour_count : 0,isSelected : {completed: false}},
+    {id : 0, name : 'element2', hour_count : 0, isSelected : {completed: false}},
+    {id : 0, name : 'element3', hour_count : 0, isSelected : {completed: false}}
   ];
   task: Task = {
     completed: false,
