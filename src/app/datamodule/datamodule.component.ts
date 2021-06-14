@@ -11,9 +11,9 @@ import { SideNavService } from '../side-nav.service';
 export class DatamoduleComponent implements OnInit, AfterViewInit {
 
   elementList: Module[] = [
-    {name : 'element1', isSelected : {completed: false}},
-    {name : 'element2', isSelected : {completed: false}},
-    {name : 'element3', isSelected : {completed: false}}
+    {id : 0, nom : 'element1',filieres: [{id : 0, nom : "filiere1", isSelected : {completed : false}}], isSelected : {completed: false}},
+    {id : 0, nom : 'element2',filieres: [{id : 0, nom : "filiere1", isSelected : {completed : false}}], isSelected : {completed: false}},
+    {id : 0, nom : 'element3',filieres: [{id : 0, nom : "filiere1", isSelected : {completed : false}}], isSelected : {completed: false}}
   ];
   task: Task = {
     completed: false,

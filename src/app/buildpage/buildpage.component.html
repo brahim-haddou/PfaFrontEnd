@@ -1,5 +1,22 @@
 <div class="body">
-    <div class="side-bar">
-
+    <div class="header">
+               
     </div>
+    <div class="colchange">
+        <mat-label>Nombre de creneau :</mat-label>
+        <input type="text" [(ngModel)]="col" >
+        <button mat-flat-button color="primary" (click)="changeCols()" >OK</button>
+    </div>
+    <p class="warning">Attention, le changement de nombre de créneau va réintialiser le tableau !!</p>
+    <mat-grid-list cols="{{colcount}}" rowHeight="50px" class="grid">
+        <mat-grid-tile *ngFor="let item of header">
+            <input type="text"><div class="example-spacer"></div><input type="text">
+        </mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list cols="{{colcount}}" rowHeight="50px" class="grid">
+    <mat-grid-tile *ngFor="let item of emploi">
+        <button mat-stroked-button class="tile-btn">{{item.index}}</button></mat-grid-tile>
+    </mat-grid-list>  
+
+    
 </div>

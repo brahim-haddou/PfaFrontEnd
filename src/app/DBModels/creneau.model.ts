@@ -5,5 +5,4 @@ export interface Creneau {
     jour: string;
     debut: number;
     fin: number;
-    isSelected: Task;
 }

@@ -1,7 +1,7 @@
 import { Task } from './Task'; 
 
 export interface Filiere {
-    //id : string;
-    name: string;
+    id : number;
+    nom: string;
     isSelected: Task;
 }

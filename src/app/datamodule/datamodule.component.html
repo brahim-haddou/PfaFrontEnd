@@ -30,7 +30,7 @@
     <mat-checkbox aria-label="Select All" class="check-box" style="margin-left: 0;" 
     [(ngModel)]="element.isSelected.completed"
     (ngModelChange)="updateAllComplete()"></mat-checkbox>
-    <button mat-button class="liste-button">{{element.name}}</button>
+    <button mat-button class="liste-button">{{element.nom}}</button>
     <button mat-mini-fab color="warn" aria-label="Delete" class="fab-delete" (click)="delElement(element)" >
       <mat-icon class="small-icon">delete</mat-icon>
     </button>

@@ -40,6 +40,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
 import { StartformComponent } from './startform/startform.component';
 import { BuildpageComponent } from './buildpage/buildpage.component';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { BuildpageComponent } from './buildpage/buildpage.component';
     MatCheckboxModule,
     MatAutocompleteModule,
     MatChipsModule,
+    MatGridListModule,
     ReactiveFormsModule
   ],
   providers: [
