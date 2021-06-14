@@ -95,6 +95,11 @@ export class BuildpageComponent implements OnInit {
     this.colcount = this.col;
    }
 
+   save():void {
+
+    
+   }
+
   ngOnInit(): void {
   }
 

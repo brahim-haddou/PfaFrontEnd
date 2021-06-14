@@ -8,15 +8,20 @@
         <button mat-flat-button color="primary" (click)="changeCols()" >OK</button>
     </div>
     <p class="warning">Attention, le changement de nombre de créneau va réintialiser le tableau !!</p>
+    <form>
     <mat-grid-list cols="{{colcount}}" rowHeight="50px" class="grid">
         <mat-grid-tile *ngFor="let item of header">
             <input type="text"><div class="example-spacer"></div><input type="text">
         </mat-grid-tile>
     </mat-grid-list>
+    </form>
     <mat-grid-list cols="{{colcount}}" rowHeight="50px" class="grid">
-    <mat-grid-tile *ngFor="let item of emploi">
-        <button mat-stroked-button class="tile-btn">{{item.index}}</button></mat-grid-tile>
+        <mat-grid-tile *ngFor="let item of emploi">
+            <button mat-stroked-button class="tile-btn">{{item.index}}</button>
+        </mat-grid-tile>
     </mat-grid-list>  
-
+    <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="save()">
+        <mat-icon>save</mat-icon>
+      </button>
     
 </div>
