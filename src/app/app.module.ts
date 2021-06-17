@@ -41,6 +41,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { StartformComponent } from './startform/startform.component';
 import { BuildpageComponent } from './buildpage/buildpage.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { ProfdetailComponent } from './profdetail/profdetail.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     ProfaddformComponent,
     StartformComponent,
     BuildpageComponent,
+    ProfdetailComponent,
   ],
   entryComponents: [LogincardComponent],
   imports: [

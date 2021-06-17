@@ -14,7 +14,7 @@ const routes: Routes = [
   { path : 'data' , component :DatapageComponent, children: [
     { path : '' , redirectTo: 'prof', pathMatch: 'full'},
     { path : 'prof' , component :DataprofComponent},
-    { path : 'module/:id', component:DatamoduleComponent }
+    { path : 'prof/module/:id', component:DatamoduleComponent }
   ]},
   { path : "**" , component :PageNotFoundComponent}
 ];

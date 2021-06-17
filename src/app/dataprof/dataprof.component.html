@@ -20,7 +20,7 @@
           </div>
         </form>
        <button mat-flat-button [disabled]="delDisabled" class="del" (click)="selecDelete()"><mat-icon class="small-icon" matPrefix>delete</mat-icon>Delete</button>
-       <button mat-flat-button class="add" (click)="openLoginDialog()"><mat-icon class="small-icon" matPrefix>add</mat-icon>Add</button>
+       <button mat-flat-button class="add" (click)="openFormDialog()"><mat-icon class="small-icon" matPrefix>add</mat-icon>Add</button>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
   [(ngModel)]="element.isSelected.completed"
   [ngModelOptions]="{standalone: true}"
   (ngModelChange)="updateAllComplete()"></mat-checkbox>
-  <button mat-button class="liste-button" routerLink="module/{{element.name}}" >{{element.name}}</button>
+  <button mat-button class="liste-button" (click)="openDetailDialog()" >{{element.name}}</button><!--routerLink="module/{{element.id}}"-->
   <button mat-mini-fab color="warn" aria-label="Delete" class="fab-delete" (click)="delElement(element)" >
     <mat-icon class="small-icon">delete</mat-icon>
   </button>

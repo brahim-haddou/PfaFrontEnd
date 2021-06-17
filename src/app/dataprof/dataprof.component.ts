@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Prof } from '../DBModels/prof.model';
 import { Task } from '../DBModels/Task';
 import { SideNavService } from '../side-nav.service';
 import {MatDialog} from '@angular/material/dialog';
 import { ProfaddformComponent } from '../profaddform/profaddform.component';
+import { ProfdetailComponent } from '../profdetail/profdetail.component';
 
 @Component({
   selector: 'app-dataprof',
@@ -12,48 +13,55 @@ import { ProfaddformComponent } from '../profaddform/profaddform.component';
 })
 export class DataprofComponent implements OnInit, AfterViewInit {
 
-  elementList: Prof[] = [
-    {id : 0, name : 'element1', hour_count : 0,isSelected : {completed: false}},
-    {id : 0, name : 'element2', hour_count : 0, isSelected : {completed: false}},
-    {id : 0, name : 'element3', hour_count : 0, isSelected : {completed: false}}
-  ];
-  task: Task = {
-    completed: false,
-    subtasks: [
-      this.elementList[0].isSelected,
-      this.elementList[1].isSelected,
-      this.elementList[2].isSelected
-    ]
-  };
-  allComplete: boolean = false;
-  delDisabled: boolean = true;
+  elementList: Prof[];
+  task: Task;
+  allComplete: boolean;
+  delDisabled: boolean;
 
   searchText!: string;
 
-  constructor(private sideNavService: SideNavService, public dialog: MatDialog) { }
+  constructor(private sideNavService: SideNavService, public dialog: MatDialog) {
+    this.elementList = [] ;
+    this.task = {completed: false, subtasks: []};
+    this.allComplete = false;
+    this.delDisabled = true;
+   }
 
-  openLoginDialog() {
+  ngOnInit(): void {
+    this.elementList = [] ;
+    this.task = {completed: false, subtasks: []};
+    this.allComplete = false;
+    this.delDisabled = true;
+    for (let i = 0; i < 4; i++) {
+      this.elementList.push({id : 0, name : 'element'+i , hour_count : 0,isSelected : {completed: false}});   
+      this.task.subtasks?.push(this.elementList[i].isSelected)   
+    }
+  }
+
+  openFormDialog() {
     this.dialog.open(ProfaddformComponent);
   }
 
+  openDetailDialog() {
+    this.dialog.open(ProfdetailComponent);
+  }
+
   delElement(p: Prof) {
-    for(var x of this.elementList) {
-      if(p == x) {
-        const index = this.elementList.indexOf(x);
-        delete this.elementList[index];
-        this.elementList.splice(index, 1);
-      }
-    }
+    const index = this.elementList.indexOf(p);
+    // delete from data base
+    delete this.elementList[index];
+    this.elementList.splice(index, 1);
     this.updateAllComplete()
   }
 
   selecDelete() {
+    /*delete from database then reload table */
     for(var x of this.elementList) {
       if(x.isSelected.completed)
       {
         const index = this.elementList.indexOf(x);
         delete this.elementList[index];
-        this.elementList.splice(index);
+        this.elementList.splice(index, 1);
       }
     }
   }
@@ -100,9 +108,5 @@ export class DataprofComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
   }
-
-  ngOnInit(): void {
-  }
-
 }
 

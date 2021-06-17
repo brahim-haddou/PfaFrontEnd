@@ -1,4 +1,6 @@
+import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Module } from '../DBModels/module.model';
 import { Task } from '../DBModels/Task';
 import { SideNavService } from '../side-nav.service';
@@ -28,7 +30,9 @@ export class DatamoduleComponent implements OnInit, AfterViewInit {
 
   searchText!: string;
 
-  constructor(private sideNavService: SideNavService) { }
+  quizId!: Variable;
+
+  constructor(private sideNavService: SideNavService, private activatedRoute: ActivatedRoute) { }
 
   delElement(p: Module) {
     for(var x of this.elementList) {
@@ -96,6 +100,7 @@ export class DatamoduleComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.quizId = this.activatedRoute.snapshot.params['id'];
   }
 
 }
