@@ -1,14 +1,13 @@
-import { Classe } from './classe.model'
-import { Prof } from './prof.model'
-import { Salle } from './salle.model'
-import { Creneau } from './creneau.model'
+import { Classe } from './classe.model';
+import { Prof } from './prof.model';
+import { Salle } from './salle.model';
+import { Creneau } from './creneau.model';
 
 export interface Emploi {
-    id : number;
-    index : number;
+    id: number;
     classe: Classe;
-    prof: Prof;
-    salle : Salle;
-    creneau : Creneau;
+    professeur: Prof;
+    salle: Salle;
+    creneau: Creneau;
 
 }

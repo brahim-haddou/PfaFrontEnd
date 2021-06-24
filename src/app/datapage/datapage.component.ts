@@ -14,8 +14,7 @@ export class DatapageComponent implements OnInit, AfterViewInit {
   @ViewChild('sidenav')
   public sidenav!: MatSidenav;
 
-  constructor(private sideNavService: SideNavService, public dialog: MatDialog) { 
-  }
+  constructor(private sideNavService: SideNavService, public dialog: MatDialog) { }
 
   openLoginDialog() {
     this.dialog.open(StartformComponent);
@@ -29,9 +28,8 @@ export class DatapageComponent implements OnInit, AfterViewInit {
     this.sideNavService.setSidenav(this.sidenav);
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.sideNavService.setSidenav(this.sidenav);
-  } 
-  
+  }
 }
 

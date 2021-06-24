@@ -13,18 +13,18 @@ import { Prof } from '../DBModels/prof.model';
   styleUrls: ['./profaddform.component.css']
 })
 export class ProfaddformComponent {
-  
+
   visible = true;
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   objectCtrl = new FormControl();
   filteredobjects: Observable<Prof[]>;
-  objects: Prof[] = [{id : 0 , name : 'element0', hour_count : 0 , isSelected : {completed: false}}];
+  objects: Prof[] = [{id : 0 , nom : 'Prof', isSelected : {completed: false}}];
   allobjects: Prof[] = [
-    {id : 0 , name : 'element0', hour_count : 0 , isSelected : {completed: false}},
-    {id : 0 , name : 'element0', hour_count : 0 , isSelected : {completed: false}},
-    {id : 0 , name : 'element0', hour_count : 0 , isSelected : {completed: false}}
+    {id : 0 , nom : 'Prof', isSelected : {completed: false}},
+    {id : 0 , nom : 'Prof', isSelected : {completed: false}},
+    {id : 0 , nom : 'Prof', isSelected : {completed: false}}
   ];
 
   @ViewChild('objectInput') objectInput!: ElementRef<HTMLInputElement>;
@@ -41,7 +41,7 @@ export class ProfaddformComponent {
 
     // Add our object
     if (value) {
-      this.objects.push({id : 0 , name : 'element0', hour_count : 0 , isSelected : {completed: false}});
+      this.objects.push({id : 0 , nom : 'Prof', isSelected : {completed: false}});
     }
 
     // Clear the input value
@@ -59,7 +59,7 @@ export class ProfaddformComponent {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.objects.push({id : 0 , name : 'element0', hour_count : 0 , isSelected : {completed: false}});
+    this.objects.push({id : 0 , nom : 'Prof',  isSelected : {completed: false}});
     this.objectInput.nativeElement.value = '';
     this.objectCtrl.setValue(null);
   }
@@ -67,6 +67,6 @@ export class ProfaddformComponent {
   private _filter(value: string): Prof[] {
     const filterValue = value.toLowerCase();
 
-    return this.allobjects.filter(object => object.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.allobjects.filter(object => object.nom.toLowerCase().indexOf(filterValue) === 0);
   }
 }

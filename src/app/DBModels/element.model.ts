@@ -1,9 +1,8 @@
-import { Task } from './Task'; 
-import { Module } from './module.model'
+import { Task } from './Task';
 
 export interface Element {
-    id : number;
+    id: number;
     nom: string;
-    module: Module[];
+    moduleId?: number;
     isSelected: Task;
 }

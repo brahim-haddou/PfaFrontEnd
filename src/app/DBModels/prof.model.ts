@@ -1,8 +1,7 @@
-import { Task } from './Task'; 
+import { Task } from './Task';
 
 export interface Prof {
-    id : number;
-    name: string;
-    hour_count: number;
+    id: number;
+    nom: string;
     isSelected: Task;
 }

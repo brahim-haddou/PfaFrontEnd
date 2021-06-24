@@ -10,7 +10,7 @@ import { Creneau } from '../DBModels/creneau.model';
 export class BuildpageComponent implements OnInit {
 
   col! : number;
-  colcount!: number;  
+  colcount!: number;
   emploi!: Emploi[];
   creneau!: Creneau[];
   header!: number[];
@@ -47,20 +47,38 @@ export class BuildpageComponent implements OnInit {
       }
     }
     for (let i = 0; i < this.col*6; i++) {
-      this.emploi.push({id : 0, index : i, classe : {id : 0, nom : "classe1", type : "cour", maxEtudiant : 40, 
-    elements : [{id : 0, nom : "element1", module : [ { id : 0, nom : "module1", 
-    filieres: [{id : 0, nom : "filiere1", isSelected : {completed : false}}], isSelected : {completed : false} }], 
-    isSelected : {completed : false}}], isSelected : { completed : false}}, prof : {id : 0, name : "prof1", 
-    hour_count : 0, isSelected : { completed : false} }, salle : {id : 0, nom: "salle1", 
-  type : "amphi", maxPlace : 200, isSelected : {completed : false}}, creneau : this.creneau[i]}); 
-      
+      this.emploi.push(
+        {
+          id : 0,
+          classe : {
+            id : 0,
+            nom : "classe1",
+            type : "cour",
+            maxEtudiant : 40,
+            isSelected : { completed : false}
+          },
+          professeur : {
+            id : 0,
+            nom : "prof1",
+            isSelected : { completed : false}
+          },
+          salle : {
+            id : 0,
+            nom: "salle1",
+            type : "amphi",
+            maxPlace : 200,
+            isSelected : {completed : false}
+          },
+          creneau : this.creneau[i]
+        }
+      );
     }
     this.colcount = this.col;
    }
 
    save():void {
 
-    
+
    }
 
   ngOnInit(): void {
@@ -92,15 +110,33 @@ export class BuildpageComponent implements OnInit {
       }
     }
     for (let i = 0; i < this.colcount*6; i++) {
-      this.emploi.push({id : 0, index : i, classe : {id : 0, nom : "classe1", type : "cour", maxEtudiant : 40, 
-    elements : [{id : 0, nom : "element1", module : [ { id : 0, nom : "module1", 
-    filieres: [{id : 0, nom : "filiere1", isSelected : {completed : false}}], isSelected : {completed : false} }], 
-    isSelected : {completed : false}}], isSelected : { completed : false}}, prof : {id : 0, name : "prof1", 
-    hour_count : 0, isSelected : { completed : false} }, salle : {id : 0, nom: "salle1", 
-  type : "amphi", maxPlace : 200, isSelected : {completed : false}}, creneau : this.creneau[i]}); 
-      
+      this.emploi.push(
+        {
+          id : 0,
+          classe : {
+            id : 0,
+            nom : "classe1",
+            type : "cour",
+            maxEtudiant : 40,
+            isSelected : { completed : false}
+          },
+          professeur : {
+            id : 0,
+            nom : "prof1",
+            isSelected : { completed : false}
+          },
+          salle : {
+            id : 0,
+            nom: "salle1",
+            type : "amphi",
+            maxPlace : 200,
+            isSelected : {completed : false}
+          },
+          creneau : this.creneau[i]
+        }
+      );
     }
-    
+
   }
 
 }

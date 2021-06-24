@@ -12,7 +12,7 @@
       [selectable]="selectable"
       [removable]="removable"
       (removed)="remove(object)">
-      {{object.name}}
+      {{object.nom}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
     <input
@@ -25,12 +25,12 @@
       (matChipInputTokenEnd)="add($event)">
   </mat-chip-list>
   <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-    <mat-option *ngFor="let object of filteredobjects | async" [value]="object.name">
-      {{object.name}}
+    <mat-option *ngFor="let object of filteredobjects | async" [value]="object.nom">
+      {{object.nom}}
     </mat-option>
   </mat-autocomplete>
 </mat-form-field>
 <button mat-flat-button color="primary">submit</button>
 </div>
 
-  
+

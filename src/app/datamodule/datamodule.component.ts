@@ -13,9 +13,9 @@ import { SideNavService } from '../side-nav.service';
 export class DatamoduleComponent implements OnInit, AfterViewInit {
 
   elementList: Module[] = [
-    {id : 0, nom : 'element1',filieres: [{id : 0, nom : "filiere1", isSelected : {completed : false}}], isSelected : {completed: false}},
-    {id : 0, nom : 'element2',filieres: [{id : 0, nom : "filiere1", isSelected : {completed : false}}], isSelected : {completed: false}},
-    {id : 0, nom : 'element3',filieres: [{id : 0, nom : "filiere1", isSelected : {completed : false}}], isSelected : {completed: false}}
+    {id : 0, nom : 'element1', isSelected : {completed: false}},
+    {id : 0, nom : 'element2', isSelected : {completed: false}},
+    {id : 0, nom : 'element3', isSelected : {completed: false}}
   ];
   task: Task = {
     completed: false,
@@ -56,7 +56,7 @@ export class DatamoduleComponent implements OnInit, AfterViewInit {
     }
   }
 
-  clickMenu() { 
+  clickMenu() {
     this.sideNavService.toggle();
   }
 
@@ -92,7 +92,7 @@ export class DatamoduleComponent implements OnInit, AfterViewInit {
     {
       this.delDisabled = true;
     }
-    
+
     this.task.subtasks.forEach(t => t.completed = completed);
   }
 

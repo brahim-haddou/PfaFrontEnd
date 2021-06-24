@@ -1,11 +1,10 @@
-import { Task } from './Task'; 
-import { Element } from './element.model'
+import { Task } from './Task';
 
 export interface Classe {
-    id : number;
+    id: number;
     nom: string;
     type: string;
     maxEtudiant: number;
-    elements: Element[];
+    elementId?: number;
     isSelected: Task;
 }

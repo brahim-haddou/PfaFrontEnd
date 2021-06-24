@@ -1,9 +1,8 @@
-import { Task } from './Task'; 
-import{ Filiere } from './filiere.model';
+import { Task } from './Task';
 
 export interface Module {
-    id : number;
+    id: number;
     nom: string;
-    filieres: Filiere[];
+    filiereId?: number;
     isSelected: Task;
 }
