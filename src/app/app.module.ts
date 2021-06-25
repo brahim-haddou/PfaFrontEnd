@@ -41,9 +41,11 @@ import {MatChipsModule} from '@angular/material/chips';
 import { StartformComponent } from './startform/startform.component';
 import { BuildpageComponent } from './buildpage/buildpage.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { ProfdetailComponent } from './profdetail/profdetail.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { DatafiliereComponent } from './datafiliere/datafiliere.component';
+import { AddfiliereComponent } from './addfiliere/addfiliere.component';
+import { AddprofComponent } from './addprof/addprof.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,9 @@ import { HttpClientModule } from '@angular/common/http';
     ProfaddformComponent,
     StartformComponent,
     BuildpageComponent,
-    ProfdetailComponent,
+    DatafiliereComponent,
+    AddfiliereComponent,
+    AddprofComponent,
   ],
   entryComponents: [LogincardComponent],
   imports: [

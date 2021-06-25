@@ -1,28 +1,28 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Prof } from '../DBModels/prof.model';
+import { Filiere } from '../DBModels/filiere.model';
 import { Task } from '../DBModels/Task';
 import { SideNavService } from '../side-nav.service';
 import {MatDialog} from '@angular/material/dialog';
-import { AddprofComponent } from '../addprof/addprof.component';
+import { AddfiliereComponent } from '../addfiliere/addfiliere.component';
 import {HttpErrorResponse} from '@angular/common/http';
 
-import {DataprofService} from './dataprof.service';
+import {DatafiliereService} from './datafiliere.service';
 
 @Component({
-  selector: 'app-dataprof',
-  templateUrl: './dataprof.component.html',
+  selector: 'app-datafiliere',
+  templateUrl: './datafiliere.component.html',
   styleUrls: ['../datalist.css']
 })
-export class DataprofComponent implements OnInit {
+export class DatafiliereComponent implements OnInit {
 
-  elementList: Prof[];
+  elementList: Filiere[];
   task: Task;
   allComplete: boolean;
   delDisabled: boolean;
 
   searchText!: string;
 
-  constructor(private dataprofService: DataprofService, private sideNavService: SideNavService, public dialog: MatDialog) {
+  constructor(private datafiliereService: DatafiliereService, private sideNavService: SideNavService, public dialog: MatDialog) {
     this.elementList = [] ;
     this.task = {completed: false, subtasks: []};
     this.allComplete = false;
@@ -30,7 +30,7 @@ export class DataprofComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.getAllProfesseurs();
+    this.getAllFilieres();
     // this.elementList = [] ;
     // this.task = {completed: false, subtasks: []};
     // this.allComplete = false;
@@ -44,21 +44,21 @@ export class DataprofComponent implements OnInit {
   // tslint:disable-next-line:typedef
   openFormDialog(){
     console.log(this.elementList);
-    this.dialog.open(AddprofComponent);
+    this.dialog.open(AddfiliereComponent);
   }
 
   // tslint:disable-next-line:typedef
   openDetailDialog(){
-    //this.dialog.open();
+    //this.dialog.open(ProfdetailComponent);
   }
 
   // tslint:disable-next-line:typedef
-  delElement(p: Prof){
+  delElement(p: Filiere){
     //const index = this.elementList.indexOf(p);
     // delete from data base
     //delete this.elementList[index];
     //this.elementList.splice(index, 1);
-    this.dataprofService.deleteProfesseur(p.id).subscribe(
+    this.datafiliereService.deleteFiliere(p.id).subscribe(
       (response: string) => {
           return String;
       },
@@ -67,7 +67,7 @@ export class DataprofComponent implements OnInit {
       }
     );
     this.updateAllComplete();
-    this.getAllProfesseurs();
+    this.getAllFilieres();
   }
 
   // tslint:disable-next-line:typedef
@@ -79,7 +79,7 @@ export class DataprofComponent implements OnInit {
         //const index = this.elementList.indexOf(x);
         //delete this.elementList[index];
         //this.elementList.splice(index, 1);
-        this.dataprofService.deleteProfesseur(x.id).subscribe(
+        this.datafiliereService.deleteFiliere(x.id).subscribe(
           (response: string) => {
               return String;
           },
@@ -89,7 +89,7 @@ export class DataprofComponent implements OnInit {
           );
       }
     }
-    this.getAllProfesseurs();
+    this.getAllFilieres();
   }
 
   // tslint:disable-next-line:typedef
@@ -134,13 +134,13 @@ export class DataprofComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  public getAllProfesseurs(){
+  public getAllFilieres(){
     this.elementList = [] ;
     this.task = {completed: false, subtasks: []};
     this.allComplete = false;
     this.delDisabled = true;
-    this.dataprofService.getAllProfesseurs().subscribe(
-        (response: Prof[]) => {
+    this.datafiliereService.getAllFilieres().subscribe(
+        (response: Filiere[]) => {
           this.elementList = response;
           this.elementList.map((obj) => {
             obj.isSelected = {completed : false};
