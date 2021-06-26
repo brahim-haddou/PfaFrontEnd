@@ -45,6 +45,7 @@ export class ProfaddformComponent {
     }
 
     // Clear the input value
+    // tslint:disable-next-line:no-unused-expression
     this.objectCtrl.reset;
 
     this.objectCtrl.setValue(null);
