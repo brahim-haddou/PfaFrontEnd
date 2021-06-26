@@ -5,26 +5,26 @@ import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/a
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
-import { Prof } from '../DBModels/prof.model';
+import { Filiere } from '../DBModels/filiere.model';
 
 @Component({
-  selector: 'app-profaddform',
-  templateUrl: './profaddform.component.html',
-  styleUrls: ['./profaddform.component.css']
+  selector: 'app-addfiliere',
+  templateUrl: './addfiliere.component.html',
+  styleUrls: ['./addfiliere.component.css']
 })
-export class ProfaddformComponent {
+export class AddfiliereComponent {
 
   visible = true;
   selectable = true;
   removable = true;
   separatorKeysCodes: number[] = [ENTER, COMMA];
   objectCtrl = new FormControl();
-  filteredobjects: Observable<Prof[]>;
-  objects: Prof[] = [{id : 0 , nom : 'Prof', isSelected : {completed: false}}];
-  allobjects: Prof[] = [
-    {id : 0 , nom : 'Prof', isSelected : {completed: false}},
-    {id : 0 , nom : 'Prof', isSelected : {completed: false}},
-    {id : 0 , nom : 'Prof', isSelected : {completed: false}}
+  filteredobjects: Observable<Filiere[]>;
+  objects: Filiere[] = [{id : 0 , nom : 'Filiere'}];
+  allobjects: Filiere[] = [
+    {id : 0 , nom : 'Filiere'},
+    {id : 0 , nom : 'Filiere'},
+    {id : 0 , nom : 'Filiere'}
   ];
 
   @ViewChild('objectInput') objectInput!: ElementRef<HTMLInputElement>;
@@ -41,7 +41,7 @@ export class ProfaddformComponent {
 
     // Add our object
     if (value) {
-      this.objects.push({id : 0 , nom : 'Prof', isSelected : {completed: false}});
+      this.objects.push({id : 0 , nom : 'Filiere'});
     }
 
     // Clear the input value
@@ -51,7 +51,7 @@ export class ProfaddformComponent {
     this.objectCtrl.setValue(null);
   }
 
-  remove(object: Prof): void {
+  remove(object: Filiere): void {
     const index = this.objects.indexOf(object);
 
     if (index >= 0) {
@@ -60,12 +60,12 @@ export class ProfaddformComponent {
   }
 
   selected(event: MatAutocompleteSelectedEvent): void {
-    this.objects.push({id : 0 , nom : 'Prof',  isSelected : {completed: false}});
+    this.objects.push({id : 0 , nom : 'Filiere'});
     this.objectInput.nativeElement.value = '';
     this.objectCtrl.setValue(null);
   }
 
-  private _filter(value: string): Prof[] {
+  private _filter(value: string): Filiere[] {
     const filterValue = value.toLowerCase();
 
     return this.allobjects.filter(object => object.nom.toLowerCase().indexOf(filterValue) === 0);

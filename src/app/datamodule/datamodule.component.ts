@@ -1,106 +1,87 @@
-import { Variable } from '@angular/compiler/src/render3/r3_ast';
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Module } from '../DBModels/module.model';
-import { Task } from '../DBModels/Task';
 import { SideNavService } from '../side-nav.service';
+import {MatDialog} from '@angular/material/dialog';
+import {HttpErrorResponse} from '@angular/common/http';
+import {DatafiliereService} from '../datafiliere/datafiliere.service';
+import {DataModuleService} from './datamodule.service';
+import { AddmoduleComponent } from '../addmodule/addmodule.component'; 
+import { DetailmoduleComponent } from '../detailmodule/detailmodule.component'; 
 
 @Component({
   selector: 'app-datamodule',
   templateUrl: './datamodule.component.html',
   styleUrls: ['../datalist.css']
 })
-export class DatamoduleComponent implements OnInit, AfterViewInit {
+export class DatamoduleComponent implements OnInit {
 
-  elementList: Module[] = [
-    {id : 0, nom : 'element1', isSelected : {completed: false}},
-    {id : 0, nom : 'element2', isSelected : {completed: false}},
-    {id : 0, nom : 'element3', isSelected : {completed: false}}
-  ];
-  task: Task = {
-    completed: false,
-    subtasks: [
-      this.elementList[0].isSelected,
-      this.elementList[1].isSelected,
-      this.elementList[2].isSelected
-    ]
-  };
-  allComplete: boolean = false;
-  delDisabled: boolean = true;
-
+  elementList: Module[];
+  public show = true;
   searchText!: string;
 
-  quizId!: Variable;
+  dataId!: number;
 
-  constructor(private sideNavService: SideNavService, private activatedRoute: ActivatedRoute) { }
+  constructor(private datamoduleService: DataModuleService, private datafiliereService: DatafiliereService,private sideNavService: SideNavService, private activatedRoute: ActivatedRoute,  public dialog: MatDialog) {
+    this.elementList = [];
+   }
+
+  ngOnInit(): void {
+    this.dataId = this.activatedRoute.snapshot.params['id'];
+    this.getFiliereModules();
+  }
+
+  reload() {
+    this.show = false;
+    setTimeout(() => this.show = true);
+  }
+
+  openFormDialog(){  
+    const dataId = this.dataId
+    const dialog = this.dialog.open(AddmoduleComponent, {
+      data: { dataId },
+    });
+    dialog.afterClosed().subscribe(() => {
+      this.getFiliereModules();
+      this.reload();
+    });
+  }
+
+  openDetailDialog(module: Module){
+    const dialog = this.dialog.open(DetailmoduleComponent , {
+      data: { module },
+    });
+    dialog.afterClosed().subscribe(() => {
+      this.getFiliereModules();
+      this.reload();
+    });
+  }
 
   delElement(p: Module) {
-    for(var x of this.elementList) {
-      if(p == x) {
-        const index = this.elementList.indexOf(x);
-        delete this.elementList[index];
-        this.elementList.splice(index, 1);
-      }
-    }
-    this.updateAllComplete()
+    const index = this.elementList.indexOf(p);
+    this.datamoduleService.deleteModule(p).subscribe();
+    delete this.elementList[index];
+    this.elementList.splice(index, 1);
+    this.reload();
   }
 
-  selecDelete() {
-    for(var x of this.elementList) {
-      if(x.isSelected.completed)
-      {
-        const index = this.elementList.indexOf(x);
-        delete this.elementList[index];
-        this.elementList.splice(index);
-      }
-    }
-  }
 
   clickMenu() {
     this.sideNavService.toggle();
   }
 
-  updateAllComplete() {
-    if(this.task.subtasks != null && this.task.subtasks.some(t => t.completed)) {
-      this.delDisabled = false;
-    }
-    else {
-      this.delDisabled = true;
-    }
-    this.allComplete = this.task.subtasks != null && this.task.subtasks.every(t => t.completed);
+  public getFiliereModules(){
+    this.elementList = [] ;
+    this.datafiliereService.getFiliereModules(this.dataId).subscribe(
+        (response: Module[]) => {
+          this.elementList = response;
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+      this.reload();
   }
-
-  someComplete(): boolean {
-    if (this.task.subtasks == null) {
-      return false;
-    }
-    return this.task.subtasks.filter(t => t.completed).length > 0 && !this.allComplete;
-  }
-
-  setAll(completed: boolean) {
-    this.allComplete = completed;
-    if (this.task.subtasks == null) {
-      return;
-    }
-    if(this.task.subtasks != null && this.task.subtasks.some(t => t.completed)) {
-      this.delDisabled = false;
-    }
-    if(this.task.subtasks != null && this.task.subtasks.every(t => !t.completed)) {
-      this.delDisabled = false;
-    }
-    if(this.task.subtasks != null && this.task.subtasks.every(t => t.completed))
-    {
-      this.delDisabled = true;
-    }
-
-    this.task.subtasks.forEach(t => t.completed = completed);
-  }
-
-  ngAfterViewInit() {
-  }
-
-  ngOnInit(): void {
-    this.quizId = this.activatedRoute.snapshot.params['id'];
-  }
+  
 
 }

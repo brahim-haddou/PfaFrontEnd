@@ -1,0 +1,18 @@
+<div class="body">
+    <h2>Detail Filiere</h2>
+    <mat-form-field appearance="standard">
+        <label><b>Nom :</b></label>
+        <input matInput placeholder="Modifier le nom de la Filiere" [(ngModel)]="data.filiere.nom"
+        [ngModelOptions]="{standalone: true}" >
+    </mat-form-field>
+    <div>
+        <p><b>List des moduless du filiere :</b></p>
+        <mat-chip-list>
+            <mat-chip *ngFor= "let module of moduleList">{{module.nom}}</mat-chip>
+        </mat-chip-list>          
+    </div>
+    <div class="buttons">
+        <button mat-flat-button color="primary" (click)="submit()">Modifier</button>
+        <button mat-flat-button color="alert" (click)="close()">Annuler</button>
+    </div>
+</div>

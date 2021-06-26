@@ -87,6 +87,7 @@ h1 {
   background-color: transparent;
 }
 
+
 .liste-item {
   width: 100%; 
   height: 50px;
@@ -107,6 +108,12 @@ h1 {
   text-align: left;
   height: 50px;
   margin: 10px;
+}
+
+.redirect-button{
+  text-align: left;
+  width: 100px;
+  height: 50px;
 }
 
 .fab-delete {

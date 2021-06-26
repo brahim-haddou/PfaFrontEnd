@@ -1,0 +1,24 @@
+<div class="body">
+    <h2>Detail Element</h2>
+    <mat-form-field appearance="standard">
+        <label><b>Nom :</b></label>
+        <input matInput placeholder="Modifier le nom du l'element" [(ngModel)]="data.element.nom"
+        [ngModelOptions]="{standalone: true}" >
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="selection">
+        <mat-label><b>Selectioner le module :</b></mat-label>
+        <mat-select [(value)]="data.element.moduleId" >
+          <mat-option *ngFor= "let module of moduleList" value="{{module.id}}">{{module.nom}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div>
+        <p><b>List des classes du l'element :</b></p>
+        <mat-chip-list>
+            <mat-chip *ngFor= "let classe of classeList">{{classe.nom}}</mat-chip>
+        </mat-chip-list>          
+    </div>
+    <div class="buttons">
+        <button mat-flat-button color="primary" (click)="submit()">Modifier</button>
+        <button mat-flat-button color="alert" (click)="close()">Annuler</button>
+    </div>
+</div>

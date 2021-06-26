@@ -1,10 +1,8 @@
-import { Task } from './Task';
 
 export interface Classe {
-    id: number;
+    id?: number;
     nom: string;
     type: string;
     maxEtudiant: number;
     elementId?: number;
-    isSelected: Task;
 }

@@ -1,0 +1,11 @@
+<div class="body">
+    <h2>Ajouter Filiere</h2>
+    <mat-form-field appearance="standard">
+        <mat-label>Nom :</mat-label>
+        <input matInput placeholder="Entez le nom complet de la filiere" [(ngModel)]="nom"
+        [ngModelOptions]="{standalone: true}" >
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="submit()">submit</button>
+</div>
+    
+    

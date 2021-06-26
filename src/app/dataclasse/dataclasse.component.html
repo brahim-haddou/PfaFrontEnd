@@ -1,0 +1,32 @@
+<div class="body">
+    <div class="header">
+    <div id="header-top">
+        <button class="openclose-drawer-fab" mat-fab color="primary" aria-label="Open/Close" (click)="clickMenu()">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+        <h1>Liste Classes</h1>
+    </div>
+    <div id="header-bot">
+      <div class="liste-header">
+        <div class="liste-header-item">
+          <b class="liste-button">Nom</b>
+          <form class="form-inline waves-light" mdbWavesEffect>
+            <div class="md-form mt-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" [(ngModel)]="searchText" [ngModelOptions]="{standalone: true}" style="background-color: #4e4e4e; color: white;">
+            </div>
+          </form>
+         <button mat-flat-button class="add" (click)="openFormDialog()"><mat-icon class="small-icon" matPrefix>add</mat-icon>Add</button>
+        </div>
+      </div>
+    </div>
+</div>
+<mat-list class="liste-container">
+  <mat-list-item class="liste-item" *ngFor= "let element of elementList"> 
+    <button mat-button class="liste-button" (click)="openDetailDialog(element)" >{{element.nom}}</button>
+    <button mat-mini-fab color="warn" aria-label="Delete" class="fab-delete" (click)="delElement(element)" >
+      <mat-icon class="small-icon">delete</mat-icon>
+    </button>
+  </mat-list-item>
+ </mat-list> 
+
+</div>

@@ -18,7 +18,6 @@ import {MatCardModule} from '@angular/material/card';
 import { LogincardComponent } from './logincard/logincard.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { UserbuttonComponent } from './userbutton/userbutton.component';
 import { LoggedInToolbarComponent } from './logged-in-toolbar/logged-in-toolbar.component';
@@ -35,15 +34,29 @@ import {MatListModule} from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { FilterPipe } from './filter.pipe';
 import { DatamoduleComponent } from './datamodule/datamodule.component';
-import { ProfaddformComponent } from './profaddform/profaddform.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatChipsModule} from '@angular/material/chips';
 import { StartformComponent } from './startform/startform.component';
 import { BuildpageComponent } from './buildpage/buildpage.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { ProfdetailComponent } from './profdetail/profdetail.component';
-
 import { HttpClientModule } from '@angular/common/http';
+import { DatafiliereComponent } from './datafiliere/datafiliere.component';
+import { AddprofComponent } from './addprof/addprof.component';
+import { DetailprofComponent } from './detailprof/detailprof.component';
+import { DataelementComponent } from './dataelement/dataelement.component';
+import { DataclasseComponent } from './dataclasse/dataclasse.component';
+import { AddfiliereComponent } from './addfiliere/addfiliere.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { DetailfiliereComponent } from './detailfiliere/detailfiliere.component';
+import { AddmoduleComponent } from './addmodule/addmodule.component';
+import { DetailmoduleComponent } from './detailmodule/detailmodule.component';
+import { AddelementComponent } from './addelement/addelement.component';
+import { DetailelementComponent } from './detailelement/detailelement.component';
+import { AddclasseComponent } from './addclasse/addclasse.component';
+import { DetailclasseComponent } from './detailclasse/detailclasse.component';
+import { DatasalleComponent } from './datasalle/datasalle.component';
+import { AddsalleComponent } from './addsalle/addsalle.component';
+import { DetailsalleComponent } from './detailsalle/detailsalle.component'; 
 
 @NgModule({
   declarations: [
@@ -61,10 +74,24 @@ import { HttpClientModule } from '@angular/common/http';
     DataprofComponent,
     FilterPipe,
     DatamoduleComponent,
-    ProfaddformComponent,
     StartformComponent,
     BuildpageComponent,
-    ProfdetailComponent,
+    DatafiliereComponent,
+    AddprofComponent,
+    DetailprofComponent,
+    DataelementComponent,
+    DataclasseComponent,
+    AddfiliereComponent,
+    DetailfiliereComponent,
+    AddmoduleComponent,
+    DetailmoduleComponent,
+    AddelementComponent,
+    DetailelementComponent,
+    AddclasseComponent,
+    DetailclasseComponent,
+    DatasalleComponent,
+    AddsalleComponent,
+    DetailsalleComponent,
   ],
   entryComponents: [LogincardComponent],
   imports: [
