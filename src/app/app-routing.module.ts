@@ -14,7 +14,7 @@ import { DatasalleComponent } from './datasalle/datasalle.component';
 const routes: Routes = [
   { path : '' , redirectTo: 'home' , pathMatch: 'full'},
   { path : 'home' , component :HomepageComponent},
-  { path : 'build' , component :BuildpageComponent},
+  { path : 'build/:id/:nom' , component :BuildpageComponent},
   { path : 'data' , component :DatapageComponent, children: [
     { path : '' , redirectTo: 'prof', pathMatch: 'full'},
     { path : 'filiere' , component :DatafiliereComponent},

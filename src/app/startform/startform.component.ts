@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
+import { DatafiliereService } from '../datafiliere/datafiliere.service';
+import { Filiere } from '../DBModels/filiere.model';
+import {HttpErrorResponse} from '@angular/common/http';
 
 
 @Component({
@@ -13,15 +11,30 @@ interface Food {
 })
 export class StartformComponent implements OnInit {
 
-  foods: Food[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
+  listFiliere: Filiere[];
+  choixFiliere!: Filiere;
+  nom!: string;
 
-  constructor() { }
+  constructor(private datafiliereService: DatafiliereService) {
+    this.listFiliere = [];
+    this.getAllFilieres();
+   }
 
   ngOnInit(): void {
+    this.getAllFilieres();
+  }
+
+  public getAllFilieres(){
+    this.listFiliere = [];
+    this.datafiliereService.getAllFilieres().subscribe(
+        (response: Filiere[]) => {
+          this.listFiliere = response;
+          this.choixFiliere = this.listFiliere[0];
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+    );
   }
 
 }
