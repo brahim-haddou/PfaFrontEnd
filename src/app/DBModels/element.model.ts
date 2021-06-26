@@ -1,8 +1,6 @@
-import { Task } from './Task';
 
 export interface Element {
-    id: number;
+    id?: number;
     nom: string;
     moduleId?: number;
-    isSelected: Task;
 }

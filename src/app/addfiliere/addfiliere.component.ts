@@ -1,72 +1,40 @@
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {MatAutocompleteSelectedEvent, MatAutocomplete} from '@angular/material/autocomplete';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 import { Filiere } from '../DBModels/filiere.model';
+import {HttpErrorResponse} from '@angular/common/http';
+import {DatafiliereService} from '../datafiliere/datafiliere.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-addfiliere',
   templateUrl: './addfiliere.component.html',
   styleUrls: ['./addfiliere.component.css']
 })
-export class AddfiliereComponent {
+export class AddfiliereComponent implements OnInit {
 
-  visible = true;
-  selectable = true;
-  removable = true;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  objectCtrl = new FormControl();
-  filteredobjects: Observable<Filiere[]>;
-  objects: Filiere[] = [{id : 0 , nom : 'Filiere', isSelected : {completed: false}}];
-  allobjects: Filiere[] = [
-    {id : 0 , nom : 'Filiere', isSelected : {completed: false}},
-    {id : 0 , nom : 'Filiere', isSelected : {completed: false}},
-    {id : 0 , nom : 'Filiere', isSelected : {completed: false}}
-  ];
+  nom!: string;
+  filiere!: Filiere;
 
-  @ViewChild('objectInput') objectInput!: ElementRef<HTMLInputElement>;
-  @ViewChild('auto') matAutocomplete!: MatAutocomplete;
+  constructor(private datafiliereService: DatafiliereService, private dialogRef: MatDialogRef<AddfiliereComponent>) { }
 
-  constructor() {
-    this.filteredobjects = this.objectCtrl.valueChanges.pipe(
-        startWith(null),
-        map((object: string | null) => object ? this._filter(object) : this.allobjects.slice()));
+  ngOnInit(): void {
   }
 
-  add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-
-    // Add our object
-    if (value) {
-      this.objects.push({id : 0 , nom : 'Filiere', isSelected : {completed: false}});
-    }
-
-    // Clear the input value
-    this.objectCtrl.reset;
-
-    this.objectCtrl.setValue(null);
+  submit(): void {
+    this.filiere = {nom: this.nom};
+    this.createFiliere(this.filiere);
+    this.dialogRef.close();
   }
 
-  remove(object: Filiere): void {
-    const index = this.objects.indexOf(object);
-
-    if (index >= 0) {
-      this.objects.splice(index, 1);
-    }
+  createFiliere(filiere: Filiere): void{
+    this.datafiliereService.createFiliere(filiere).subscribe(
+      (request: Filiere) => {
+        filiere = request;
+        return String;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.objects.push({id : 0 , nom : 'Filiere',  isSelected : {completed: false}});
-    this.objectInput.nativeElement.value = '';
-    this.objectCtrl.setValue(null);
-  }
-
-  private _filter(value: string): Filiere[] {
-    const filterValue = value.toLowerCase();
-
-    return this.allobjects.filter(object => object.nom.toLowerCase().indexOf(filterValue) === 0);
-  }
 }

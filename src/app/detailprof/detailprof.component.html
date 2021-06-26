@@ -1,0 +1,18 @@
+<div class="body">
+    <h2>Detail Professeur</h2>
+    <mat-form-field appearance="standard">
+        <label><b>Nom :</b></label>
+        <input matInput placeholder="Modifier le nom complet du professeur" [(ngModel)]="data.prof.nom"
+        [ngModelOptions]="{standalone: true}" >
+    </mat-form-field>
+    <div>
+        <p><b>List des élements du professeur :</b></p>
+        <mat-chip-list>
+            <mat-chip *ngFor= "let element of elementList">{{element.nom}}</mat-chip>
+        </mat-chip-list>          
+    </div>
+    <div class="buttons">
+        <button mat-flat-button color="primary" (click)="submit()">Modifier</button>
+        <button mat-flat-button color="alert" (click)="close()">Annuler</button>
+    </div>
+</div>

@@ -17,7 +17,7 @@
     </form>
     <mat-grid-list cols="{{colcount}}" rowHeight="50px" class="grid">
         <mat-grid-tile *ngFor="let item of emploi">
-<!--            <button mat-stroked-button class="tile-btn">{{item.index}}</button>-->
+            <button mat-stroked-button class="tile-btn">{{item.index}}</button>
         </mat-grid-tile>
     </mat-grid-list>
     <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="save()">

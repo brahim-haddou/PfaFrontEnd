@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Emploi } from '../DBModels/emploi.model';
 import { Creneau } from '../DBModels/creneau.model';
 
+
 @Component({
   selector: 'app-buildpage',
   templateUrl: './buildpage.component.html',
@@ -17,6 +18,7 @@ export class BuildpageComponent implements OnInit {
 
   constructor() {
    }
+
 
    changeCols(): void {
     this.colcount = this.col;
@@ -54,20 +56,18 @@ export class BuildpageComponent implements OnInit {
             id : 0,
             nom : "classe1",
             type : "cour",
-            maxEtudiant : 40,
-            isSelected : { completed : false}
+            maxEtudiant : 40
           },
+          index: i,
           professeur : {
             id : 0,
-            nom : "prof1",
-            isSelected : { completed : false}
+            nom : "prof1"
           },
           salle : {
             id : 0,
             nom: "salle1",
             type : "amphi",
-            maxPlace : 200,
-            isSelected : {completed : false}
+            maxPlace : 200            
           },
           creneau : this.creneau[i]
         }
@@ -117,20 +117,18 @@ export class BuildpageComponent implements OnInit {
             id : 0,
             nom : "classe1",
             type : "cour",
-            maxEtudiant : 40,
-            isSelected : { completed : false}
+            maxEtudiant : 40
           },
+          index: i,
           professeur : {
             id : 0,
-            nom : "prof1",
-            isSelected : { completed : false}
+            nom : "prof1"
           },
           salle : {
             id : 0,
             nom: "salle1",
             type : "amphi",
-            maxPlace : 200,
-            isSelected : {completed : false}
+            maxPlace : 200
           },
           creneau : this.creneau[i]
         }

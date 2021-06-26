@@ -29,12 +29,12 @@ export class DataprofService{
   updateProfesseur(prof: Prof) : Observable<Prof>{
     return this.http.put<Prof>(this._url, prof);
   }
-  deleteProfesseur(id: number): Observable<string>{
-    return this.http.delete<string>( `${this._url}/${id}`);
+  deleteProfesseur(prof: Prof): Observable<string>{
+    return this.http.delete<string>( `${this._url}/${prof.id}`);
   }
 
-  getProfesseurElements(id: number): Observable<Element[]>{
-    return this.http.get<Element[]>( `${this._url}/${id}/elements`);
+  getProfesseurElements(prof: Prof): Observable<Element[]>{
+    return this.http.get<Element[]>( `${this._url}/${prof.id}/elements`);
   }
 
 

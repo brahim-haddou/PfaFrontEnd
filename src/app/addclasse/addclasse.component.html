@@ -1,0 +1,19 @@
+<div class="body">
+    <h2>Ajouter Classe</h2>
+    <mat-form-field appearance="standard">
+        <mat-label>Nom :</mat-label>
+        <input matInput placeholder="Entez le nom complet de la classe" [(ngModel)]="nom"
+        [ngModelOptions]="{standalone: true}" >
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+        <mat-label>Type :</mat-label>
+        <input matInput placeholder="Entez le type de la classe" [(ngModel)]="type"
+        [ngModelOptions]="{standalone: true}" >
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+        <mat-label>Nombre maximum des etudiants :</mat-label>
+        <input matInput placeholder="Entez le nombre maximum des etudiants" [(ngModel)]="maxEtudian"
+        [ngModelOptions]="{standalone: true}" type="number" >
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="submit()">submit</button>
+</div>

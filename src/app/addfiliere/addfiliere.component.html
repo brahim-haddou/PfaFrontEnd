@@ -1,37 +1,11 @@
 <div class="body">
-    <h2>Add Filiere</h2>
-    <mat-form-field class="nameField" appearance="standard">
-        <mat-label>Nom Complet</mat-label>
-        <input matInput placeholder="Entez votre nom complet">
+    <h2>Ajouter Filiere</h2>
+    <mat-form-field appearance="standard">
+        <mat-label>Nom :</mat-label>
+        <input matInput placeholder="Entez le nom complet de la filiere" [(ngModel)]="nom"
+        [ngModelOptions]="{standalone: true}" >
     </mat-form-field>
-    <mat-form-field class="example-chip-list">
-      <mat-label>Favorite objects</mat-label>
-      <mat-chip-list #chipList aria-label="object selection">
-        <mat-chip
-          *ngFor="let object of objects"
-          [selectable]="selectable"
-          [removable]="removable"
-          (removed)="remove(object)">
-          {{object.nom}}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
-        <input
-          placeholder="New object..."
-          #objectInput
-          [formControl]="objectCtrl"
-          [matAutocomplete]="auto"
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          (matChipInputTokenEnd)="add($event)">
-      </mat-chip-list>
-      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-        <mat-option *ngFor="let object of filteredobjects | async" [value]="object.nom">
-          {{object.nom}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-    <button mat-flat-button color="primary">submit</button>
-    </div>
-    
+    <button mat-flat-button color="primary" (click)="submit()">submit</button>
+</div>
     
     

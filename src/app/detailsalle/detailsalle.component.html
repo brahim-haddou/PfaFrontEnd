@@ -1,0 +1,21 @@
+<div class="body">
+    <h2>Detail Salle</h2>
+    <mat-form-field appearance="standard">
+        <label><b>Nom :</b></label>
+        <input matInput placeholder="Modifier le nom dela salle" [(ngModel)]="data.salle.nom"
+        [ngModelOptions]="{standalone: true}" >
+    </mat-form-field><mat-form-field appearance="standard">
+        <mat-label>Type :</mat-label>
+        <input matInput placeholder="Entez le type de la salle" [(ngModel)]="data.salle.type"
+        [ngModelOptions]="{standalone: true}" >
+    </mat-form-field>
+    <mat-form-field appearance="standard">
+        <mat-label>Nombre maximum des places :</mat-label>
+        <input matInput placeholder="Entez le nombre maximum des places" [(ngModel)]="data.salle.maxPlace"
+        [ngModelOptions]="{standalone: true}" type="number" >
+    </mat-form-field>
+    <div class="buttons">
+        <button mat-flat-button color="primary" (click)="submit()">Modifier</button>
+        <button mat-flat-button color="alert" (click)="close()">Annuler</button>
+    </div>
+</div>

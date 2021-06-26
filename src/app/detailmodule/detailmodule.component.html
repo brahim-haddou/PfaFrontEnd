@@ -1,0 +1,26 @@
+<div class="body">
+    <h2>Detail Module</h2>
+    <mat-form-field appearance="standard">
+        <label><b>Nom :</b></label>
+        <input matInput placeholder="Modifier le nom du module" [(ngModel)]="data.module.nom"
+        [ngModelOptions]="{standalone: true}" >
+        
+        
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="selection">
+        <mat-label><b>Selectioner la filiere :</b></mat-label>
+        <mat-select [(value)]="data.module.filiereId" >
+          <mat-option *ngFor= "let filiere of filiereList" value="{{filiere.id}}">{{filiere.nom}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div>
+        <p><b>List des elements du module :</b></p>
+        <mat-chip-list>
+            <mat-chip *ngFor= "let element of elementList">{{element.nom}}</mat-chip>
+        </mat-chip-list>          
+    </div>
+    <div class="buttons">
+        <button mat-flat-button color="primary" (click)="submit()">Modifier</button>
+        <button mat-flat-button color="alert" (click)="close()">Annuler</button>
+    </div>
+</div>
