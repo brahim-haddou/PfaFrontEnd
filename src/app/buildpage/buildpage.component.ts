@@ -32,24 +32,29 @@ export class BuildpageComponent implements OnInit {
   }
 
 
-   weekDay(index : number): boolean{
-    /*for (let i = 0; i < 6; i++) {
-      if (((this.colcount+1)*i) == index) {
-        return false;
-      }
-    }
-    return true;*/
-
-    if(index % this.colcount === 0){
-      return false;
-    }else{
+   sameCrenaux(index : number, pos : number): boolean{
+    if(index % this.colcount === pos){
       return true;
+    }else{
+      return false;
     }
    }
 
    ngOnInit(): void {
     this.colcount = 4;
     this.tableInit(this.colcount);
+  }
+
+  submitCrenau(): void {
+    var counter = 0;
+    for (let i = 0; i < this.colcount*6; i++) {
+      if (counter == this.colcount) {
+        counter = 0;
+      }
+      this.creneau[i].debut = this.debfinTable[counter].debut;
+      this.creneau[i].fin = this.debfinTable[counter].fin;
+      counter++;
+    }
   }
 
   tableInit(x : number): void{

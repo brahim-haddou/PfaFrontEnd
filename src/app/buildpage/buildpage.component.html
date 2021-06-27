@@ -7,7 +7,7 @@
         <input type="text" [(ngModel)]="col" >
         <button mat-flat-button color="primary" (click)="changeCols()" >OK</button>
         <div style="flex: auto 1 1 ;"></div>
-        <button mat-flat-button color="primary"  >Sauvegarder créneau</button>
+        <button mat-flat-button color="primary" (click)="submitCrenau()" >Sauvegarder créneau</button>
     </div>
     <p class="warning">Attention, le changement de nombre de créneau va réintialiser le tableau !!</p>
     <div style="height: 55vh; width: 100%; display: flex; flex-direction: row; overflow: auto;">
@@ -16,8 +16,8 @@
                 <mat-grid-tile></mat-grid-tile>
                 <mat-grid-tile>Lundi</mat-grid-tile>
                 <mat-grid-tile>Mardi</mat-grid-tile>
-                <mat-grid-tile>Mercredie</mat-grid-tile>
-                <mat-grid-tile>Mardi</mat-grid-tile>
+                <mat-grid-tile>Mercredi</mat-grid-tile>
+                <mat-grid-tile>Jeudi</mat-grid-tile>
                 <mat-grid-tile>Vendredi</mat-grid-tile>
                 <mat-grid-tile>Samedi</mat-grid-tile>
             </mat-grid-list>    
@@ -28,24 +28,19 @@
                     <mat-grid-tile *ngFor="let item of header">
                         <input type="text" [(ngModel)]="debfinTable[item].debut" [ngModelOptions]="{standalone: true}">
                         <div class="example-spacer"></div>
-                        <input type="text" [(ngModel)]="debfinTable[item].debut" [ngModelOptions]="{standalone: true}">
+                        <input type="text" [(ngModel)]="debfinTable[item].fin" [ngModelOptions]="{standalone: true}">
                     </mat-grid-tile>
                 </mat-grid-list>
             </form>
             <mat-grid-list cols="{{colcount}}" rowHeight="100px" class="grid">
                 <mat-grid-tile *ngFor="let item of emploi">
-                    <button mat-stroked-button class="tile-btn">{{item.creneau.jour}}<br>{{item.index}}</button>
+                    <button mat-stroked-button class="tile-btn">{{item.creneau.debut}}/{{item.creneau.fin}}<br>{{item.index}}</button>
                 </mat-grid-tile>
             </mat-grid-list>
         </div>
     </div>
-    
     <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="save()">
         <mat-icon>save</mat-icon>
       </button>
 
 </div>
-<!--<mat-grid-tile *ngFor= "let index of indextable">
-            <div *ngIf="weekDay(index)">{{incrementQuestionNumber()}}</div>
-            <ng-template #elseBlock>Jour</ng-template>
-        </mat-grid-tile>-->
