@@ -20,7 +20,7 @@
                 <mat-grid-tile>Jeudi</mat-grid-tile>
                 <mat-grid-tile>Vendredi</mat-grid-tile>
                 <mat-grid-tile>Samedi</mat-grid-tile>
-            </mat-grid-list>    
+            </mat-grid-list>
         </div>
         <div style="height: 100%; width: 90%;">
             <form>
@@ -34,7 +34,11 @@
             </form>
             <mat-grid-list cols="{{colcount}}" rowHeight="100px" class="grid">
                 <mat-grid-tile *ngFor="let item of emploi">
-                    <button mat-stroked-button class="tile-btn">{{item.creneau.debut}}/{{item.creneau.fin}}<br>{{item.index}}</button>
+                    <button mat-stroked-button class="tile-btn">
+                      {{item.classe.nom}} || {{item.professeur.nom}}
+                      <br>
+                      Salle : {{item.salle.nom}}
+                    </button>
                 </mat-grid-tile>
             </mat-grid-list>
         </div>

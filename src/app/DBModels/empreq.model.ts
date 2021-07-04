@@ -1,6 +1,6 @@
 
 
-export interface Emploi {
+export interface Empreq {
     id: number;
     classeId: number;
     professeurId: number;

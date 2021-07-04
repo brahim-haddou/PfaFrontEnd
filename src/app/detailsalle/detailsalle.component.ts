@@ -21,7 +21,7 @@ export class DetailsalleComponent implements OnInit {
   }
 
   submit(): void {
-    this.salle = {id: this.data.salle.id ,nom: this.data.salle.nom,type : this.data.salle.type,maxPlace : this.data.salle.maxPlace};
+    this.salle = {id: this.data.salle.id, nom: this.data.salle.nom,type : this.data.salle.type,maxPlace : this.data.salle.maxPlace};
     this.updateSalle(this.salle);
     this.dialogRef.close();
   }
