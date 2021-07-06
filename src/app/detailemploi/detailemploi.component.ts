@@ -56,6 +56,7 @@ export class DetailemploiComponent implements OnInit {
           return String;
         }
     );
+    this.dialogRef.close();
   }
 
   close(): void {
