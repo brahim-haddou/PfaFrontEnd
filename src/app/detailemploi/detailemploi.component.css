@@ -1,0 +1,16 @@
+.body{
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 90vw;
+    max-width: 500px;
+    max-height: 80%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+
+.buttons{
+    margin-top: 10px;
+}

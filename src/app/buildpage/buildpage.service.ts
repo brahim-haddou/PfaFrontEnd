@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Emploi } from '../DBModels/emploi.model';
 import { Empreq } from '../DBModels/empreq.model';
+import { Classe } from '../DBModels/classe.model';
+import { Prof } from '../DBModels/prof.model';
+import { Salle } from '../DBModels/salle.model';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import {Creneau} from '../DBModels/creneau.model';
@@ -36,17 +39,17 @@ export class BuildpageService{
     return this.http.delete<string>(`${this._url}/${emploiId}`);
   }
   // -------------- update
-  updateClasseEmploiDuTemps(emploiId: number, classeId: number): Observable<Emploi>{
+  updateClasseEmploiDuTemps(emploiId: number, classe: Classe): Observable<Emploi>{
     // @ts-ignore
-    return this.http.put<Emploi>(`${this._url}/${emploiId}/classe/${classeId}`);
+    return this.http.put<Emploi>(`${this._url}/${emploiId}/classe/${classe.id}`);
   }
-  updateProfesseurEmploiDuTemps(emploiId: number, profId: number): Observable<Emploi>{
+  updateProfesseurEmploiDuTemps(emploiId: number, prof: Prof): Observable<Emploi>{
     // @ts-ignore
-    return this.http.put<Emploi>(`${this._url}/${emploiId}/professeur/${profId}`);
+    return this.http.put<Emploi>(`${this._url}/${emploiId}/professeur/${prof.id}`);
   }
-  updateSalleEmploiDuTemps(emploiId: number, salleId: number): Observable<Emploi>{
+  updateSalleEmploiDuTemps(emploiId: number, salle: Salle): Observable<Emploi>{
     // @ts-ignore
-    return this.http.put<Emploi>(`${this._url}/${emploiId}/salle/${salleId}`);
+    return this.http.put<Emploi>(`${this._url}/${emploiId}/salle/${salle.id}`);
   }
   // -------------- delete
   deleteClasseFromEmploiDuTemps(emploiId: number): Observable<Emploi>{
@@ -76,7 +79,7 @@ export class BuildpageService{
   createCreneau(creneau: Creneau[]): Observable<Creneau[]> {
     return this.http.post<Creneau[]>(`${environment.apiBaseURL}creneau`, creneau);
   }
-  deleteCreneau(filiereId: number): Observable<string> {
+  deleteCreneau(): Observable<string> {
     return this.http.delete<string>(`${environment.apiBaseURL}creneau`);
   }
 }

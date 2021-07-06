@@ -34,7 +34,7 @@
             </form>
             <mat-grid-list cols="{{colcount}}" rowHeight="100px" class="grid">
                 <mat-grid-tile *ngFor="let item of emploi">
-                    <button mat-stroked-button class="tile-btn">
+                    <button mat-stroked-button class="tile-btn" (click)="openDetailDialog(item)">
                       {{item.classe.nom}} || {{item.professeur.nom}}
                       <br>
                       Salle : {{item.salle.nom}}
