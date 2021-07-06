@@ -25,7 +25,7 @@ export class DetailemploiComponent implements OnInit {
   salleList!: Salle[];
   classeList!: Classe[];
   display: boolean = true;
-
+  
   // tslint:disable-next-line:max-line-length
   constructor(@Inject(MAT_DIALOG_DATA) public data: {emploi: Emploi},private buildpageService: BuildpageService ,private dataprofService: DataprofService ,private datasalleService: DatasalleService ,private dataClasseService: DataClasseService , private dialogRef: MatDialogRef<DetailemploiComponent>) { }
 
@@ -66,15 +66,6 @@ export class DetailemploiComponent implements OnInit {
       salleId: this.data.emploi.salle.id,
       creneauId: this.data.emploi.creneau.id
     };
-    console.log(emp);
-    this.buildpageService.updateEmploiDuTemps(emp).subscribe(
-      (request: Emploi) => {
-        this.data.emploi = request;
-        return String;
-      }
-    )
-    this.dialogRef.close();
-  }
 
   close(): void {
     this.dialogRef.close();
