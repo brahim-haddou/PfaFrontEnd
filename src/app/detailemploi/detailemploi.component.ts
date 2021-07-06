@@ -11,6 +11,7 @@ import {DataprofService} from '../dataprof/dataprof.service';
 import {DatasalleService} from '../datasalle/datasalle.service';
 import {DataClasseService} from '../dataclasse/dataclasse.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { stringify } from '@angular/compiler/src/util';
 
 @Component({
   selector: 'app-detailemploi',
@@ -19,7 +20,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DetailemploiComponent implements OnInit {
 
-  emploi!: Empreq;
+  emploi!: Emploi;
   profList!: Prof[];
   salleList!: Salle[];
   classeList!: Classe[];
@@ -27,14 +28,32 @@ export class DetailemploiComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: {emploi: Emploi},private buildpageService: BuildpageService ,private dataprofService: DataprofService ,private datasalleService: DatasalleService ,private dataClasseService: DataClasseService , private dialogRef: MatDialogRef<DetailemploiComponent>) { }
 
   ngOnInit(): void {
+    this.emploi = this.data.emploi;
     this.getAllProfesseurs();
     this.getAllSalles();
     this.getAllClasses();
   }
 
   submit(): void {
-    this.emploi = {id: this.data.emploi.id, classeId: this.data.emploi.classe.id, professeurId: this.data.emploi.professeur.id, salleId: this.data.emploi.salle.id, creneauId: this.data.emploi.creneau.id};
-    this.updateEmploi(this.emploi);
+    var emp : Empreq;
+    emp = {id: this.data.emploi.id, classeId: this.data.emploi.classe.id, professeurId: this.data.emploi.professeur.id, salleId: this.data.emploi.salle.id, creneauId: this.data.emploi.creneau.id};
+    if (this.data.emploi.classe.nom == "" && this.data.emploi.professeur.nom == "") {
+      emp ={};
+      this.buildpageService.saveEmploiDuTemps(emp).subscribe(
+        (request : Emploi) => {
+          this.data.emploi = request;
+          return String;
+        }
+      );
+    }
+    emp = {id: this.data.emploi.id, classeId: this.data.emploi.classe.id, professeurId: this.data.emploi.professeur.id, salleId: this.data.emploi.salle.id, creneauId: this.data.emploi.creneau.id};
+    this.buildpageService.updateEmploiDuTemps(emp).subscribe(
+      (request : Emploi) => {
+        this.data.emploi = request;
+        return String;
+      }
+    )
+    //this.updateEmploi(this.data.emploi);
     this.dialogRef.close();
   }
 
@@ -42,14 +61,14 @@ export class DetailemploiComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  updateEmploi(emploi: Empreq): void{
-    this.buildpageService.updateEmploiDuTemps(emploi).subscribe(
+  updateEmploi(emploi: Emploi): void{
+    /*this.buildpageService.updateEmploiDuTemps(emploi).subscribe(
       (request : Emploi) => {
         this.data.emploi = request;
         return String;
       }
-    )
-    /*this.buildpageService.updateClasseEmploiDuTemps(emploi.id, this.data.emploi.classe).subscribe(
+    )*/
+    this.buildpageService.updateClasseEmploiDuTemps(emploi, this.emploi.classe).subscribe(
       (request: Emploi) => {
         emploi = request;
         return String;
@@ -59,7 +78,7 @@ export class DetailemploiComponent implements OnInit {
       }
     );
 
-    this.buildpageService.updateProfesseurEmploiDuTemps(emploi.id, this.data.emploi.professeur).subscribe(
+    this.buildpageService.updateProfesseurEmploiDuTemps(emploi, this.emploi.professeur).subscribe(
       (request: Emploi) => {
         emploi = request;
         return String;
@@ -69,7 +88,7 @@ export class DetailemploiComponent implements OnInit {
       }
     );
 
-    this.buildpageService.updateSalleEmploiDuTemps(emploi.id, this.data.emploi.salle).subscribe(
+    this.buildpageService.updateSalleEmploiDuTemps(emploi, this.emploi.salle).subscribe(
       (request: Emploi) => {
         emploi = request;
         return String;
@@ -77,7 +96,7 @@ export class DetailemploiComponent implements OnInit {
       (error: HttpErrorResponse) => {
         alert(error.message);
       }
-    );*/
+    );
   }
 
   public getAllProfesseurs(){

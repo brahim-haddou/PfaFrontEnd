@@ -39,17 +39,17 @@ export class BuildpageService{
     return this.http.delete<string>(`${this._url}/${emploiId}`);
   }
   // -------------- update
-  updateClasseEmploiDuTemps(emploiId: number, classe: Classe): Observable<Emploi>{
+  updateClasseEmploiDuTemps(emploiId: Emploi, classe: Classe): Observable<Emploi>{
     // @ts-ignore
-    return this.http.put<Emploi>(`${this._url}/${emploiId}/classe/${classe.id}`);
+    return this.http.put<Emploi>(`${this._url}/${emploiId.id}/classe/${classe.id}`);
   }
-  updateProfesseurEmploiDuTemps(emploiId: number, prof: Prof): Observable<Emploi>{
+  updateProfesseurEmploiDuTemps(emploiId: Emploi, prof: Prof): Observable<Emploi>{
     // @ts-ignore
-    return this.http.put<Emploi>(`${this._url}/${emploiId}/professeur/${prof.id}`);
+    return this.http.put<Emploi>(`${this._url}/${emploiId.id}/professeur/${prof.id}`);
   }
-  updateSalleEmploiDuTemps(emploiId: number, salle: Salle): Observable<Emploi>{
+  updateSalleEmploiDuTemps(emploiId: Emploi, salle: Salle): Observable<Emploi>{
     // @ts-ignore
-    return this.http.put<Emploi>(`${this._url}/${emploiId}/salle/${salle.id}`);
+    return this.http.put<Emploi>(`${this._url}/${emploiId.id}/salle/${salle.id}`);
   }
   // -------------- delete
   deleteClasseFromEmploiDuTemps(emploiId: number): Observable<Emploi>{

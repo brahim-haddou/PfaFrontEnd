@@ -150,19 +150,19 @@ export class BuildpageComponent implements OnInit {
             id :0,
             classe : {
               id : 0,
-              nom : '',
-              type : '',
+              nom : "",
+              type : "",
               maxEtudiant : 0
             },
             index: i,
             professeur : {
               id : 0,
-              nom : ''
+              nom : ""
             },
             salle : {
               id :0,
-              nom: '',
-              type : '',
+              nom: "",
+              type : "",
               maxPlace : 0
             },
             creneau : this.creneau[i]
@@ -205,7 +205,7 @@ export class BuildpageComponent implements OnInit {
           this.colcount = this.numCol(this.creneau);
           console.log(this.creneau);
           this.tableInit(this.colcount);
-          this.getFiliereEmploiDuTemps(1);
+          this.getFiliereEmploiDuTemps(this.dataId);
         }
       },
       (error: HttpErrorResponse) => {
