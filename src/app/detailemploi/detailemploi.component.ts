@@ -25,7 +25,7 @@ export class DetailemploiComponent implements OnInit {
   salleList!: Salle[];
   classeList!: Classe[];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {emploi: Emploi},private buildpageService: BuildpageService ,private dataprofService: DataprofService ,private datasalleService: DatasalleService ,private dataClasseService: DataClasseService , private dialogRef: MatDialogRef<DetailemploiComponent>) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {emploi: Emploi, req: boolean},private buildpageService: BuildpageService ,private dataprofService: DataprofService ,private datasalleService: DatasalleService ,private dataClasseService: DataClasseService , private dialogRef: MatDialogRef<DetailemploiComponent>) { }
 
   ngOnInit(): void {
     this.emploi = this.data.emploi;
@@ -36,17 +36,7 @@ export class DetailemploiComponent implements OnInit {
 
   submit(): void {
     var emp : Empreq;
-    emp = {id: this.data.emploi.id, classeId: this.data.emploi.classe.id, professeurId: this.data.emploi.professeur.id, salleId: this.data.emploi.salle.id, creneauId: this.data.emploi.creneau.id};
-    if (this.data.emploi.classe.nom == "" && this.data.emploi.professeur.nom == "") {
-      emp ={};
-      this.buildpageService.saveEmploiDuTemps(emp).subscribe(
-        (request : Emploi) => {
-          this.data.emploi = request;
-          return String;
-        }
-      );
-    }
-    emp = {id: this.data.emploi.id, classeId: this.data.emploi.classe.id, professeurId: this.data.emploi.professeur.id, salleId: this.data.emploi.salle.id, creneauId: this.data.emploi.creneau.id};
+    emp = {id: this.emploi.id, classeId: this.emploi.classe.id, professeurId: this.emploi.professeur.id, salleId: this.emploi.salle.id, creneauId: this.emploi.creneau.id};
     this.buildpageService.updateEmploiDuTemps(emp).subscribe(
       (request : Emploi) => {
         this.data.emploi = request;
@@ -55,6 +45,17 @@ export class DetailemploiComponent implements OnInit {
     )
     //this.updateEmploi(this.data.emploi);
     this.dialogRef.close();
+  }
+
+  add(): void{
+    var emp : Empreq;
+    emp ={id: this.emploi.id, classeId: this.emploi.classe.id, professeurId: this.emploi.professeur.id, salleId: this.emploi.salle.id, creneauId: this.emploi.creneau.id};
+    this.buildpageService.saveEmploiDuTemps(emp).subscribe(
+        (request : Emploi) => {
+          this.data.emploi = request;
+          return String;
+        }
+    );
   }
 
   close(): void {

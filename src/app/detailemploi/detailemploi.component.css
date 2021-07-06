@@ -9,8 +9,9 @@
     overflow-y: auto;
 }
 
-
-
+.danger{
+    display: none;
+}
 .buttons{
     margin-top: 10px;
 }

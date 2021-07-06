@@ -19,7 +19,8 @@
         </mat-select>
     </mat-form-field>
     <div class="buttons">
-        <button mat-flat-button color="primary" (click)="submit()">Modifier</button>
+        <button mat-flat-button color="primary" (click)="submit()" [ngClass]="data.req ? 'success' : 'danger'">Modifier</button>
+        <button mat-flat-button color="primary" (click)="add()" [ngClass]="!data.req ? 'success' : 'danger'">Ajouter</button>
         <button mat-flat-button color="alert" (click)="close()">Annuler</button>
     </div>
 </div>

@@ -82,8 +82,12 @@ export class BuildpageComponent implements OnInit {
   }*/
 
   openDetailDialog(emploi : Emploi){
+    var req: boolean = true;
+    if (emploi.classe.nom == "" && emploi.professeur.nom == "") {
+      req = false;
+    }
     const dialog = this.dialog.open(DetailemploiComponent , {
-      data: { emploi },
+      data: { emploi, req },
     });
     dialog.afterClosed().subscribe(() => {
       this.reload();
