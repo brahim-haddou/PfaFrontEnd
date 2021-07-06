@@ -1,5 +1,5 @@
 <div class="body">
-    <h2>{{data.emploi.creneau.jour}} :: {{data.emploi.creneau.debut}} - {{data.emploi.creneau.fin}}</h2>
+    <h2>{{data.emploi.creneau.jour}} : {{data.emploi.creneau.debut}}H - {{data.emploi.creneau.fin}}H</h2>
     <mat-form-field appearance="fill" class="selection">
         <mat-label><b>Selectioner la classe :</b></mat-label>
         <mat-select [(value)]="emploi.classe.id" >
@@ -19,7 +19,10 @@
         </mat-select>
     </mat-form-field>
     <div class="buttons">
-        <button mat-flat-button color="primary" (click)="submit()">Modifier</button>
-        <button mat-flat-button color="alert" (click)="close()">Annuler</button>
+      <button *ngIf="display; else elseTemplate"  mat-flat-button color="primary" (click)="submitSave()">Enregistrer</button>
+      <ng-template #elseTemplate>
+        <button mat-flat-button color="primary" (click)="submitUpdate()">Modifier</button>
+      </ng-template>
+      <button mat-flat-button color="alert" (click)="close()">Annuler</button>
     </div>
 </div>

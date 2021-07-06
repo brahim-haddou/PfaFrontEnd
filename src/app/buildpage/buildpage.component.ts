@@ -4,7 +4,7 @@ import { Empreq } from '../DBModels/empreq.model';
 import { Creneau } from '../DBModels/creneau.model';
 import {HttpErrorResponse} from '@angular/common/http';
 import {BuildpageService} from './buildpage.service';
-import { DetailemploiComponent } from '../detailemploi/detailemploi.component'; 
+import { DetailemploiComponent } from '../detailemploi/detailemploi.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 
@@ -28,7 +28,7 @@ export class BuildpageComponent implements OnInit {
   debfinTable!: Debutfin[];
   public show = true;
 
-  
+
   dataId!: number;
 
 
@@ -46,7 +46,7 @@ export class BuildpageComponent implements OnInit {
    }
 
    ngOnInit(): void {
-    this.dataId = this.activatedRoute.snapshot.params['id'];
+    this.dataId = this.activatedRoute.snapshot.params.id;
     this.creneau = [];
     this.colcount = 4;
     //this.initEmploi();

@@ -24,36 +24,55 @@ export class DetailemploiComponent implements OnInit {
   profList!: Prof[];
   salleList!: Salle[];
   classeList!: Classe[];
+  display: boolean = true;
 
+  // tslint:disable-next-line:max-line-length
   constructor(@Inject(MAT_DIALOG_DATA) public data: {emploi: Emploi},private buildpageService: BuildpageService ,private dataprofService: DataprofService ,private datasalleService: DatasalleService ,private dataClasseService: DataClasseService , private dialogRef: MatDialogRef<DetailemploiComponent>) { }
 
   ngOnInit(): void {
     this.emploi = this.data.emploi;
+    this.displayFunction();
     this.getAllProfesseurs();
     this.getAllSalles();
     this.getAllClasses();
   }
 
-  submit(): void {
-    var emp : Empreq;
-    emp = {id: this.data.emploi.id, classeId: this.data.emploi.classe.id, professeurId: this.data.emploi.professeur.id, salleId: this.data.emploi.salle.id, creneauId: this.data.emploi.creneau.id};
-    if (this.data.emploi.classe.nom == "" && this.data.emploi.professeur.nom == "") {
-      emp ={};
-      this.buildpageService.saveEmploiDuTemps(emp).subscribe(
-        (request : Emploi) => {
+  displayFunction(): void{
+    this.display = this.data.emploi.salle.id === 0 && this.data.emploi.professeur.id === 0 && this.data.emploi.classe.id === 0;
+  }
+  submitSave(): void {
+    let emp: Empreq;
+    emp = {
+        classeId: this.data.emploi.classe.id,
+        professeurId: this.data.emploi.professeur.id,
+        salleId: this.data.emploi.salle.id,
+        creneauId: this.data.emploi.creneau.id
+      };
+    console.log(emp);
+    this.buildpageService.saveEmploiDuTemps(emp).subscribe(
+        (request: Emploi) => {
           this.data.emploi = request;
           return String;
         }
       );
-    }
-    emp = {id: this.data.emploi.id, classeId: this.data.emploi.classe.id, professeurId: this.data.emploi.professeur.id, salleId: this.data.emploi.salle.id, creneauId: this.data.emploi.creneau.id};
+    this.dialogRef.close();
+  }
+  submitUpdate(): void {
+    let emp: Empreq;
+    emp = {
+      id: this.data.emploi.id,
+      classeId: this.data.emploi.classe.id,
+      professeurId: this.data.emploi.professeur.id,
+      salleId: this.data.emploi.salle.id,
+      creneauId: this.data.emploi.creneau.id
+    };
+    console.log(emp);
     this.buildpageService.updateEmploiDuTemps(emp).subscribe(
-      (request : Emploi) => {
+      (request: Emploi) => {
         this.data.emploi = request;
         return String;
       }
     )
-    //this.updateEmploi(this.data.emploi);
     this.dialogRef.close();
   }
 
