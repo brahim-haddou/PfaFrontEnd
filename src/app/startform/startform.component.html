@@ -1,9 +1,5 @@
 <div class="body">
   <mat-form-field appearance="fill">
-    <mat-label>Time Table Name</mat-label>
-    <input matInput [(ngModel)]="nom">
-  </mat-form-field>
-  <mat-form-field appearance="fill">
       <mat-label>Choix de filiere</mat-label>
       <mat-select [(ngModel)]="choixFiliere"
       [ngModelOptions]="{standalone: true}">
@@ -12,5 +8,5 @@
         </mat-option>
       </mat-select>
   </mat-form-field>
-  <button mat-raised-button color="accent" routerLink="build/{{choixFiliere.id}}/{{nom}}" [mat-dialog-close]="true" >Start building</button>
+  <button mat-raised-button color="accent" routerLink="build/{{choixFiliere.id}}" [mat-dialog-close]="true" >Start building</button>
 </div>

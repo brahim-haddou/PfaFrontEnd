@@ -25,6 +25,15 @@ export class DatasalleComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllSalles();
+    
+
+    this.elementList.forEach(element => {
+      const index = this.elementList.indexOf(element);
+      if (this.elementList[index].id == 0) {
+        delete this.elementList[index];
+        this.elementList.splice(index, 1);
+      }
+    });
   }
 
   reload() {
@@ -69,9 +78,15 @@ export class DatasalleComponent implements OnInit {
           this.elementList = response;
         },
         (error: HttpErrorResponse) => {
-          alert(error.message);
+          //alert(error.message);
         }
-      );
+    );
+    /*for (let i = 0; i < this.elementList.length; i++) {
+      if (this.elementList[i].nom == null) {
+        delete this.elementList[i];
+        this.elementList.splice(i-1,1);
+      }      
+    }*/
     this.reload();
   }
 

@@ -1,3 +1,4 @@
+import { ViewportScroller } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -10,9 +11,14 @@ export class HomepageComponent implements OnInit {
 
   title = 'PfaFrontEnd';
 
-  constructor() { }
+  constructor(public _vps: ViewportScroller) { }
 
   ngOnInit(): void {
   }
+
+  scrollFn(anchor: string): void{
+  	this._vps.scrollToAnchor(anchor)
+    console.log("scroled")
+}
 
 }

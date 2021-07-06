@@ -1,0 +1,25 @@
+<div class="body">
+    <h2>{{data.emploi.creneau.jour}} :: {{data.emploi.creneau.debut}} - {{data.emploi.creneau.fin}}</h2>
+    <mat-form-field appearance="fill" class="selection">
+        <mat-label><b>Selectioner la classe :</b></mat-label>
+        <mat-select [(value)]="emploi.classe.id" >
+          <mat-option *ngFor= "let classe of classeList" value="{{classe.id}}">{{classe.nom}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="selection">
+        <mat-label><b>Selectioner le Professeur :</b></mat-label>
+        <mat-select [(value)]="emploi.professeur.id" >
+          <mat-option *ngFor= "let prof of profList" value="{{prof.id}}">{{prof.nom}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="selection">
+        <mat-label><b>Selectioner la salle :</b></mat-label>
+        <mat-select [(value)]="emploi.salle.id" >
+          <mat-option *ngFor= "let salle of salleList" value="{{salle.id}}">{{salle.nom}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div class="buttons">
+        <button mat-flat-button color="primary" (click)="submit()">Modifier</button>
+        <button mat-flat-button color="alert" (click)="close()">Annuler</button>
+    </div>
+</div>

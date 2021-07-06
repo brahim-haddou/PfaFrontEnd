@@ -13,7 +13,6 @@ export class StartformComponent implements OnInit {
 
   listFiliere: Filiere[];
   choixFiliere!: Filiere;
-  nom!: string;
 
   constructor(private datafiliereService: DatafiliereService) {
     this.listFiliere = [];

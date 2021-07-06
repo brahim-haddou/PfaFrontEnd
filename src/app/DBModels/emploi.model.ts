@@ -4,7 +4,7 @@ import { Salle } from './salle.model';
 import { Creneau } from './creneau.model';
 
 export interface Emploi {
-    id: number;
+    id?: number;
     index: number;
     classe: Classe;
     professeur: Prof;

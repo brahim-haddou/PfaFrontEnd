@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Emploi } from '../DBModels/emploi.model';
+import { Empreq } from '../DBModels/empreq.model';
 import { Creneau } from '../DBModels/creneau.model';
 import {HttpErrorResponse} from '@angular/common/http';
 import {BuildpageService} from './buildpage.service';
+import { DetailemploiComponent } from '../detailemploi/detailemploi.component'; 
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
 
 interface Debutfin {
   debut: number;
@@ -24,8 +28,11 @@ export class BuildpageComponent implements OnInit {
   debfinTable!: Debutfin[];
   public show = true;
 
+  
+  dataId!: number;
 
-  constructor(private buildpageService: BuildpageService, ) {
+
+  constructor(private buildpageService: BuildpageService,  public dialog: MatDialog, private activatedRoute: ActivatedRoute) {
    }
 
    reload() {
@@ -39,11 +46,48 @@ export class BuildpageComponent implements OnInit {
    }
 
    ngOnInit(): void {
+    this.dataId = this.activatedRoute.snapshot.params['id'];
     this.creneau = [];
     this.colcount = 4;
+    //this.initEmploi();
     this.tableInit(this.colcount);
     this.getCreneau();
+  }
 
+  /*initEmploi(): void{
+    var emploiBD : Emploi[];
+    emploiBD = [];
+    this.buildpageService.getFiliereEmploiDuTemps(this.dataId).subscribe(
+      (request: Emploi[]) => {
+        emploiBD = request;
+        return String;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+    var count: number = 0;
+    if (emploiBD.length != 0) {
+      for (let i = 0; i < emploiBD.length; i++) {
+        if (emploiBD[i].creneau.jour == "Lundi") {
+          count++;
+        }
+      }
+      this.colcount = count;
+      this.emploi = emploiBD;
+    }
+    else{
+      this.tableInit(this.colcount);
+    }
+  }*/
+
+  openDetailDialog(emploi : Emploi){
+    const dialog = this.dialog.open(DetailemploiComponent , {
+      data: { emploi },
+    });
+    dialog.afterClosed().subscribe(() => {
+      this.reload();
+    });
   }
 
   submitCrenau(): void {
@@ -88,32 +132,56 @@ export class BuildpageComponent implements OnInit {
         }
       }
     }
+
+    /*this.buildpageService.deleteCreneau().subscribe();
+    this.buildpageService.createCreneau(this.creneau).subscribe(
+      (request: Creneau[]) => {
+        this.creneau = request;
+        return String;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );*/
+
     for (let i = 0; i < 6 * x; i++) {
         this.emploi.push(
           {
-            id : 0,
             classe : {
               id : 0,
-              nom : '',
-              type : '',
+              nom : "",
+              type : "",
               maxEtudiant : 0
             },
             index: i,
             professeur : {
               id : 0,
-              nom : ''
+              nom : ""
             },
             salle : {
-              id : 0,
-              nom: '',
-              type : '',
+              id :0,
+              nom: "",
+              type : "",
               maxPlace : 0
             },
             creneau : this.creneau[i]
           }
         );
-
     }
+
+    /*this.emploi.forEach(element => {
+      var emp: Empreq;
+      emp = {id : element.id, classeId : element.classe.id, professeurId : element.professeur.id, salleId : element.salle.id, creneauId : element.creneau.id};
+      this.buildpageService.saveEmploiDuTemps(emp).subscribe(
+        (request: Emploi) => {
+          element = request;
+          return String;
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+    });*/
 
     this.reload();
   }
@@ -136,7 +204,7 @@ export class BuildpageComponent implements OnInit {
           this.colcount = this.numCol(this.creneau);
           console.log(this.creneau);
           this.tableInit(this.colcount);
-          this.getFiliereEmploiDuTemps(1);
+          this.getFiliereEmploiDuTemps(this.dataId);
         }
       },
       (error: HttpErrorResponse) => {

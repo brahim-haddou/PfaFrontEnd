@@ -65,7 +65,7 @@ h1 {
 .liste-container {
   height: auto;
   width: 90%;
-  max-height: 70%;
+  max-height: 60%;
   overflow: auto;
   margin-left: 5%;
   margin-right: 5%;

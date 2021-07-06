@@ -73,6 +73,12 @@ export class DataprofComponent implements OnInit {
           alert(error.message);
         }
       );
+    for (let i = 0; i < this.elementList.length; i++) {
+      if (this.elementList[i].id == 0) {
+        delete this.elementList[i];
+        this.elementList.splice(i,1);
+      }      
+    }
     this.reload();
   }
 }

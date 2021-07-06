@@ -56,7 +56,8 @@ import { AddclasseComponent } from './addclasse/addclasse.component';
 import { DetailclasseComponent } from './detailclasse/detailclasse.component';
 import { DatasalleComponent } from './datasalle/datasalle.component';
 import { AddsalleComponent } from './addsalle/addsalle.component';
-import { DetailsalleComponent } from './detailsalle/detailsalle.component'; 
+import { DetailsalleComponent } from './detailsalle/detailsalle.component';
+import { DetailemploiComponent } from './detailemploi/detailemploi.component'; 
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { DetailsalleComponent } from './detailsalle/detailsalle.component';
     DatasalleComponent,
     AddsalleComponent,
     DetailsalleComponent,
+    DetailemploiComponent,
   ],
   entryComponents: [LogincardComponent],
   imports: [
