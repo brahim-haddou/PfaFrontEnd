@@ -147,7 +147,6 @@ export class BuildpageComponent implements OnInit {
     for (let i = 0; i < 6 * x; i++) {
         this.emploi.push(
           {
-            id :0,
             classe : {
               id : 0,
               nom : "",

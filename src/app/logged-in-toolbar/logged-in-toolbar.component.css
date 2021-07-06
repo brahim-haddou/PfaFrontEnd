@@ -34,3 +34,9 @@
   overflow: auto;
 }
 
+.liste-button {
+  width: 100%;
+  flex: 1 1 auto;
+  text-align: left;
+}
+

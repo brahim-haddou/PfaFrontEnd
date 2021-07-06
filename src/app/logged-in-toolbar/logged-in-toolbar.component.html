@@ -6,11 +6,13 @@
     <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Timetables you Created
+            Liste des emplois du temps
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>Tmmmmmmmmmm<br>mmmmmmmmmm<br>mmmmmmmmmm</p>
+        <mat-list-item class="liste-item" *ngFor= "let element of listFIliere">
+          <button mat-button *ngIf="show" class="liste-button" routerLink="build/{{element.id}}" >{{element.nom}}</button>
+        </mat-list-item>
     </mat-expansion-panel>
 </div>
-<button mat-flat-button color="primary" id="newtt" routerLink="/data">Create new Timetable</button>
+<button mat-flat-button color="primary" id="newtt" routerLink="/data">Crée un emploi du temps</button>
 <app-userbutton></app-userbutton>

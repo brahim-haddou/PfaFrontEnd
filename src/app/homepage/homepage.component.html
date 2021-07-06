@@ -1,19 +1,19 @@
 <div id="body"><div class="shade">
   <div id="stickynavtoolbar">
-    <button mat-stroked-button>Welcome</button>
-    <button mat-stroked-button>Features</button>
-    <button mat-stroked-button>Tutorial</button>
-    <button mat-raised-button color="primary">Get started</button>
+    <button mat-stroked-button (click)="_vps.scrollToPosition([0,0])">Welcome</button>
+    <button mat-stroked-button (click)="scrollFn('features')">Features</button>
+    <button mat-stroked-button (click)="scrollFn('tutorial')">Tutorial</button>
+    <button mat-raised-button color="primary" (click)="scrollFn('start')">Get started</button>
   </div>
   <div id="welcome">
     <div class="picshade">
       <div class="field" style="height: auto;">
-      <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1><br>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <h1>Constructeur des emploi des temps</h1><br>
+      <p>Bienvenu, ce site permet la creation et las gestion des emplois du temps d'une ecole out faculté d'une façon inovante et intuitive</p>
       </div>
-    </div>
   </div>
-  <div class="division">
+  </div>
+  <div class="division" id="features">
     <mat-card class="block">
       <mat-divider class="verti" [inset]="true" [vertical]="true"></mat-divider>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -22,7 +22,7 @@
       <img src="https://static.vecteezy.com/system/resources/previews/000/831/099/non_2x/dark-blue-abstract-motion-geometric-background-vector.jpg" alt="img1">
     </div>
   </div>
-  <div class="division">
+  <div class="division" id="tutorial">
     <mat-card class="block" style="background-color: rgba(0, 0, 0, 0); float: right;">
       <mat-divider class="verti" [inset]="true" [vertical]="true"></mat-divider>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -31,10 +31,13 @@
       <img src="https://static.vecteezy.com/system/resources/previews/000/831/099/non_2x/dark-blue-abstract-motion-geometric-background-vector.jpg" alt="img1">
     </div>
   </div>
-  <div class="division" style="background-color: #3f51b5;">
+  <div class="division" style="background-color: #3f51b5;" id="start">
     <mat-card class="block" style="background-color: transparent; float: none;">
       <mat-divider class="verti" [inset]="true" [vertical]="true"></mat-divider>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <p>
+        Click le button en dessous et commence construire ton emploi du temps
+        <button mat-flat-button color="accent" id="newtt" routerLink="/data" style="margin-top: 20px;">Commence ICI</button>
+      </p>
       <mat-divider class="verti" [inset]="true" [vertical]="true" style=" margin-left: 0; margin-right: 80px;"></mat-divider>
     </mat-card>
   </div>
