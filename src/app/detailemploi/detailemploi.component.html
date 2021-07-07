@@ -1,25 +1,47 @@
 <div class="body">
     <h2>{{data.emploi.creneau.jour}} :: {{data.emploi.creneau.debut}} - {{data.emploi.creneau.fin}}</h2>
-    <mat-form-field appearance="fill" class="selection">
-        <mat-label><b>Selectioner la classe :</b></mat-label>
-        <mat-select [(value)]="emploi.classe.id" >
-          <mat-option *ngFor= "let classe of classeList" value="{{classe.id}}">{{classe.nom}}</mat-option>
-        </mat-select>
-    </mat-form-field>
+    <div style="display: flex; flex-direction: row;">
+      <div style="flex-direction: column;">
+        <mat-form-field appearance="fill" class="selection">
+          <mat-label><b>Selectioner le module :</b></mat-label>
+          <mat-select [(value)]="selectedModule" (selectionChange)="changeModule()" >
+            <mat-option *ngFor= "let module of moduleList" value={{module.id}}>{{module.nom}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div style="flex-direction: column;">
+        <mat-form-field appearance="fill" class="selection">
+          <mat-label><b>Selectioner l'element :</b></mat-label>
+          <mat-select [(value)]="selectedElement" (selectionChange)="changeElement()">
+            <mat-option *ngFor= "let element of elementList" value={{element.id}}>{{element.nom}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div style="flex-direction: column;">
+        <mat-form-field appearance="fill" class="selection">
+          <mat-label><b>Selectioner la classe :</b></mat-label>
+          <mat-select [(value)]="emploi.classe.id" >
+            <mat-option *ngFor= "let classe of classeList" value={{classe.id}}>{{classe.nom}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
     <mat-form-field appearance="fill" class="selection">
         <mat-label><b>Selectioner le Professeur :</b></mat-label>
         <mat-select [(value)]="emploi.professeur.id" >
-          <mat-option *ngFor= "let prof of profList" value="{{prof.id}}">{{prof.nom}}</mat-option>
+          <mat-option *ngFor= "let prof of profList" value={{prof.id}}>{{prof.nom}}</mat-option>
         </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill" class="selection">
         <mat-label><b>Selectioner la salle :</b></mat-label>
         <mat-select [(value)]="emploi.salle.id" >
-          <mat-option *ngFor= "let salle of salleList" value="{{salle.id}}">{{salle.nom}}</mat-option>
+          <mat-option *ngFor= "let salle of salleList" value={{salle.id}}>{{salle.nom}}</mat-option>
         </mat-select>
     </mat-form-field>
     <div class="buttons">
-        <button mat-flat-button color="primary" (click)="submit()">Modifier</button>
+        <button mat-flat-button color="primary" *ngIf="data.req" (click)="submit()">Modifier</button>
+        <button mat-flat-button color="primary" *ngIf="!data.req" (click)="add()">Enregitrer</button>
+        <button mat-flat-button color="warn" *ngIf="data.req" (click)="del()">Suprimer</button>
         <button mat-flat-button color="alert" (click)="close()">Annuler</button>
     </div>
 </div>

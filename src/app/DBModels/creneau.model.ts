@@ -3,4 +3,5 @@ export interface Creneau {
     jour: string;
     debut: number;
     fin: number;
+    filiereId: number;
 }

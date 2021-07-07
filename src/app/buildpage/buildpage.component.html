@@ -34,7 +34,7 @@
             </form>
             <mat-grid-list cols="{{colcount}}" rowHeight="100px" class="grid">
                 <mat-grid-tile *ngFor="let item of emploi">
-                    <button mat-stroked-button class="tile-btn" (click)="openDetailDialog(item)">
+                    <button *ngIf="show" mat-stroked-button class="tile-btn" (click)="openDetailDialog(item)">
                       {{item.classe.nom}} || {{item.professeur.nom}}
                       <br>
                       Salle : {{item.salle.nom}}
@@ -43,7 +43,7 @@
             </mat-grid-list>
         </div>
     </div>
-    <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="save()">
+    <button mat-fab color="primary" (click)="save()">
         <mat-icon>save</mat-icon>
       </button>
 

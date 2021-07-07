@@ -4,7 +4,7 @@ import { Empreq } from '../DBModels/empreq.model';
 import { Creneau } from '../DBModels/creneau.model';
 import {HttpErrorResponse} from '@angular/common/http';
 import {BuildpageService} from './buildpage.service';
-import { DetailemploiComponent } from '../detailemploi/detailemploi.component'; 
+import { DetailemploiComponent } from '../detailemploi/detailemploi.component';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 
@@ -28,7 +28,7 @@ export class BuildpageComponent implements OnInit {
   debfinTable!: Debutfin[];
   public show = true;
 
-  
+
   dataId!: number;
 
 
@@ -46,7 +46,7 @@ export class BuildpageComponent implements OnInit {
    }
 
    ngOnInit(): void {
-    this.dataId = this.activatedRoute.snapshot.params['id'];
+    this.dataId = this.activatedRoute.snapshot.params.id;
     this.creneau = [];
     this.colcount = 4;
     //this.initEmploi();
@@ -82,24 +82,68 @@ export class BuildpageComponent implements OnInit {
   }*/
 
   openDetailDialog(emploi : Emploi){
+    var req: boolean = true;
+    var dataId : number = this.dataId;
+    if (emploi.classe.nom == "" && emploi.professeur.nom == "") {
+      req = false;
+    }
     const dialog = this.dialog.open(DetailemploiComponent , {
-      data: { emploi },
+      data: { emploi, req, dataId },
     });
     dialog.afterClosed().subscribe(() => {
+      console.log(emploi.id);
       this.reload();
     });
   }
 
   submitCrenau(): void {
     let counter = 0;
+    this.creneau = [];
+    console.log(this.debfinTable)
+    for (let l = 0; l < 6 * this.colcount; l++) {
+      if (l >= 0 && l < this.colcount) {
+        this.creneau.push({jour: 'Lundi', debut : 0, fin : 0, filiereId: this.dataId});
+      }
+      if (l >= this.colcount && l < this.colcount * 2) {
+        this.creneau.push({jour: 'Mardi', debut : 0, fin : 0, filiereId: this.dataId});
+      }
+      if (l >= this.colcount * 2 && l < this.colcount * 3) {
+        this.creneau.push({jour: 'Mercredi', debut : 0, fin : 0, filiereId: this.dataId});
+      }
+      if (l >= this.colcount * 3 && l < this.colcount * 4) {
+        this.creneau.push({jour: 'Jeudi', debut : 0, fin : 0, filiereId: this.dataId});
+      }
+      if (l >= this.colcount * 4 && l < this.colcount * 5) {
+        this.creneau.push({jour: 'Vendredi', debut : 0, fin : 0, filiereId: this.dataId});
+      }
+      if (l >= this.colcount * 5 && l < this.colcount * 6) {
+        this.creneau.push({jour: 'Samedi', debut : 0, fin : 0, filiereId: this.dataId});
+      }
+    }
+    
+    console.log(this.colcount);
     for (let i = 0; i < this.colcount * 6; i++) {
-      if (counter === this.colcount) {
+      console.log(counter);
+      this.creneau[i].debut = +this.debfinTable[counter].debut;
+      this.creneau[i].fin = +this.debfinTable[counter].fin;
+      counter++;
+      if (counter == this.colcount) {
         counter = 0;
       }
-      this.creneau[i].debut = this.debfinTable[counter].debut;
-      this.creneau[i].fin = this.debfinTable[counter].fin;
-      counter++;
     }
+    console.log(this.creneau);
+    this.buildpageService.deleteCreneau(this.dataId).subscribe();
+    this.buildpageService.createCreneau(this.creneau).subscribe(
+      (request: Creneau[]) => {
+        this.creneau = request;
+        this.tableInit(this.colcount);
+        // this.reload();
+        return String;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
   tableInit(x: number): void{
@@ -113,22 +157,22 @@ export class BuildpageComponent implements OnInit {
     if (this.creneau.length === 0 ){
       for (let l = 0; l < 6 * x; l++) {
         if (l >= 0 && l < x) {
-          this.creneau.push({jour: 'Lundi', debut : 0, fin : 0});
+          this.creneau.push({jour: 'Lundi', debut : 0, fin : 0, filiereId: this.dataId});
         }
         if (l >= x && l < x * 2) {
-          this.creneau.push({jour: 'Mardi', debut : 0, fin : 0});
+          this.creneau.push({jour: 'Mardi', debut : 0, fin : 0, filiereId: this.dataId});
         }
         if (l >= x * 2 && l < x * 3) {
-          this.creneau.push({jour: 'Mercredi', debut : 0, fin : 0});
+          this.creneau.push({jour: 'Mercredi', debut : 0, fin : 0, filiereId: this.dataId});
         }
         if (l >= x * 3 && l < x * 4) {
-          this.creneau.push({jour: 'Jeudi', debut : 0, fin : 0});
+          this.creneau.push({jour: 'Jeudi', debut : 0, fin : 0, filiereId: this.dataId});
         }
         if (l >= x * 4 && l < x * 5) {
-          this.creneau.push({jour: 'Vendredi', debut : 0, fin : 0});
+          this.creneau.push({jour: 'Vendredi', debut : 0, fin : 0, filiereId: this.dataId});
         }
         if (l >= x * 5 && l < x * 6) {
-          this.creneau.push({jour: 'Samedi', debut : 0, fin : 0});
+          this.creneau.push({jour: 'Samedi', debut : 0, fin : 0, filiereId: this.dataId});
         }
       }
     }
@@ -197,7 +241,7 @@ export class BuildpageComponent implements OnInit {
   // tslint:disable-next-line:typedef
   public getCreneau(){
     this.creneau = [] ;
-    this.buildpageService.getCreneau().subscribe(
+    this.buildpageService.getCreneau(this.dataId).subscribe(
       (response: Creneau[]) => {
         if (response.length !== 0){
           this.creneau = response;
@@ -249,6 +293,7 @@ export class BuildpageComponent implements OnInit {
           &&
           emplFiliere[l].creneau.fin === empl[n].creneau.fin
         ){
+          empl[n].id = emplFiliere[l].id;
           empl[n].classe = emplFiliere[l].classe;
           empl[n].professeur = emplFiliere[l].professeur;
           empl[n].salle = emplFiliere[l].salle;

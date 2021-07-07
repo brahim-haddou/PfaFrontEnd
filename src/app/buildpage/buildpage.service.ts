@@ -73,13 +73,13 @@ export class BuildpageService{
     return this.http.get(`${this._url}/salle/${salleId}/excel`, { responseType: 'blob' });
   }
   // ------- Creneau
-  getCreneau(): Observable<Creneau[]> {
-    return this.http.get<Creneau[]>(`${environment.apiBaseURL}creneau`);
+  getCreneau(id: number): Observable<Creneau[]> {
+    return this.http.get<Creneau[]>(`${environment.apiBaseURL}creneau/${id}`);
   }
   createCreneau(creneau: Creneau[]): Observable<Creneau[]> {
     return this.http.post<Creneau[]>(`${environment.apiBaseURL}creneau`, creneau);
   }
-  deleteCreneau(): Observable<string> {
-    return this.http.delete<string>(`${environment.apiBaseURL}creneau`);
+  deleteCreneau(id: number): Observable<string> {
+    return this.http.delete<string>(`${environment.apiBaseURL}creneau/${id}`);
   }
 }

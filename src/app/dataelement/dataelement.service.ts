@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Element } from '../DBModels/element.model';
 import { Classe } from '../DBModels/classe.model';
+import { Prof } from '../DBModels/prof.model';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
@@ -38,6 +39,10 @@ export class DataElementService{
   }
   getClasses(element: Element): Observable<Classe[]>{
     return this.http.get<Classe[]>( `${this._url}/${element.id}/classes`);
+  }
+  
+  getProfesseurElement(id: number): Observable<Prof[]>{
+    return this.http.get<Prof[]>( `${this._url}/${id}/professeurs`);
   }
 
 
