@@ -46,7 +46,15 @@ export class BuildpageComponent implements OnInit {
    }
 
    ngOnInit(): void {
-    this.dataId = this.activatedRoute.snapshot.params.id;
+    //this.dataId = this.activatedRoute.snapshot.params.id;
+    this.activatedRoute.queryParams.subscribe(queryParams => {
+
+    });
+    this.activatedRoute.params.subscribe(routeParams => {
+      this.dataId = routeParams.id;
+      console.log(routeParams.id);
+      this.reload();
+    });
     this.creneau = [];
     this.colcount = 4;
     //this.initEmploi();
