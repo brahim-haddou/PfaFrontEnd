@@ -56,18 +56,16 @@ export class DetailemploiComponent implements OnInit {
     this.getProfesseurElement(x);
   }
 
+
   submit(): void {
     var emp : Empreq;
     emp = {id: +this.emploi.id!, classeId: +this.emploi.classe.id!, professeurId: +this.emploi.professeur.id!, salleId: +this.emploi.salle.id!, creneauId: +this.emploi.creneau.id!};
     this.buildpageService.updateEmploiDuTemps(emp).subscribe(
-      (request : Emploi) => {
+      (request: Emploi) => {
         this.data.emploi = request;
         return String;
       }
-    )
-    console.log(this.data.emploi);
-    console.log(emp)
-    //this.updateEmploi(this.data.emploi);
+      );
     this.dialogRef.close();
   }
 

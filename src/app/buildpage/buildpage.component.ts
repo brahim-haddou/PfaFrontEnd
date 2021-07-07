@@ -49,7 +49,7 @@ export class BuildpageComponent implements OnInit {
     this.dataId = this.activatedRoute.snapshot.params.id;
     this.creneau = [];
     this.colcount = 4;
-    //this.initEmploi();
+    // this.initEmploi();
     this.tableInit(this.colcount);
     this.getCreneau();
   }
@@ -191,21 +191,22 @@ export class BuildpageComponent implements OnInit {
     for (let i = 0; i < 6 * x; i++) {
         this.emploi.push(
           {
+            id: 0,
             classe : {
               id : 0,
-              nom : "",
-              type : "",
+              nom : '',
+              type : '',
               maxEtudiant : 0
             },
             index: i,
             professeur : {
               id : 0,
-              nom : ""
+              nom : ''
             },
             salle : {
-              id :0,
-              nom: "",
-              type : "",
+              id : 0,
+              nom: '',
+              type : '',
               maxPlace : 0
             },
             creneau : this.creneau[i]
