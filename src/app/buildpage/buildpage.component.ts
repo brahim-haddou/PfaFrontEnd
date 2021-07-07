@@ -49,7 +49,7 @@ export class BuildpageComponent implements OnInit {
     this.dataId = this.activatedRoute.snapshot.params.id;
     this.creneau = [];
     this.colcount = 4;
-    //this.initEmploi();
+    // this.initEmploi();
     this.tableInit(this.colcount);
     this.getCreneau();
   }
@@ -81,9 +81,9 @@ export class BuildpageComponent implements OnInit {
     }
   }*/
 
-  openDetailDialog(emploi : Emploi){
-    var req: boolean = true;
-    if (emploi.classe.nom == "" && emploi.professeur.nom == "") {
+  openDetailDialog(emploi: Emploi): void {
+    let req = true;
+    if (emploi.classe.nom === "" && emploi.professeur.nom === "") {
       req = false;
     }
     const dialog = this.dialog.open(DetailemploiComponent , {
@@ -151,21 +151,22 @@ export class BuildpageComponent implements OnInit {
     for (let i = 0; i < 6 * x; i++) {
         this.emploi.push(
           {
+            id: 0,
             classe : {
               id : 0,
-              nom : "",
-              type : "",
+              nom : '',
+              type : '',
               maxEtudiant : 0
             },
             index: i,
             professeur : {
               id : 0,
-              nom : ""
+              nom : ''
             },
             salle : {
-              id :0,
-              nom: "",
-              type : "",
+              id : 0,
+              nom: '',
+              type : '',
               maxPlace : 0
             },
             creneau : this.creneau[i]
@@ -253,6 +254,7 @@ export class BuildpageComponent implements OnInit {
           &&
           emplFiliere[l].creneau.fin === empl[n].creneau.fin
         ){
+          empl[n].id = emplFiliere[l].id;
           empl[n].classe = emplFiliere[l].classe;
           empl[n].professeur = emplFiliere[l].professeur;
           empl[n].salle = emplFiliere[l].salle;

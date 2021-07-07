@@ -12,6 +12,7 @@ import {DatasalleService} from '../datasalle/datasalle.service';
 import {DataClasseService} from '../dataclasse/dataclasse.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { stringify } from '@angular/compiler/src/util';
+import {NumberSymbol} from '@angular/common';
 
 @Component({
   selector: 'app-detailemploi',
@@ -25,7 +26,7 @@ export class DetailemploiComponent implements OnInit {
   salleList!: Salle[];
   classeList!: Classe[];
   display: boolean = true;
-  
+
   // tslint:disable-next-line:max-line-length
   constructor(@Inject(MAT_DIALOG_DATA) public data: {emploi: Emploi},private buildpageService: BuildpageService ,private dataprofService: DataprofService ,private datasalleService: DatasalleService ,private dataClasseService: DataClasseService , private dialogRef: MatDialogRef<DetailemploiComponent>) { }
 
@@ -43,10 +44,10 @@ export class DetailemploiComponent implements OnInit {
   submitSave(): void {
     let emp: Empreq;
     emp = {
-        classeId: this.data.emploi.classe.id,
-        professeurId: this.data.emploi.professeur.id,
-        salleId: this.data.emploi.salle.id,
-        creneauId: this.data.emploi.creneau.id
+        classeId: Number(this.data.emploi.classe.id),
+        professeurId: Number(this.data.emploi.professeur.id),
+        salleId: Number(this.data.emploi.salle.id),
+        creneauId: Number(this.data.emploi.creneau.id)
       };
     console.log(emp);
     this.buildpageService.saveEmploiDuTemps(emp).subscribe(
@@ -60,12 +61,21 @@ export class DetailemploiComponent implements OnInit {
   submitUpdate(): void {
     let emp: Empreq;
     emp = {
-      id: this.data.emploi.id,
-      classeId: this.data.emploi.classe.id,
-      professeurId: this.data.emploi.professeur.id,
-      salleId: this.data.emploi.salle.id,
-      creneauId: this.data.emploi.creneau.id
+      id: Number(this.data.emploi.id),
+      classeId: Number(this.data.emploi.classe.id),
+      professeurId: Number(this.data.emploi.professeur.id),
+      salleId: Number(this.data.emploi.salle.id),
+      creneauId: Number(this.data.emploi.creneau.id)
     };
+    console.log(emp);
+    this.buildpageService.updateEmploiDuTemps(emp).subscribe(
+      (request: Emploi) => {
+        this.data.emploi = request;
+        return String;
+      }
+    );
+    this.dialogRef.close();
+  }
 
   close(): void {
     this.dialogRef.close();
