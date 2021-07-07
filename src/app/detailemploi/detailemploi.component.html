@@ -1,5 +1,6 @@
 <div class="body">
     <h2>{{data.emploi.creneau.jour}} :: {{data.emploi.creneau.debut}} - {{data.emploi.creneau.fin}}</h2>
+    <p *ngIf="data.req">Changer la classe {{data.emploi.classe.nom}}</p>
     <div style="display: flex; flex-direction: row;">
       <div style="flex-direction: column;">
         <mat-form-field appearance="fill" class="selection">
