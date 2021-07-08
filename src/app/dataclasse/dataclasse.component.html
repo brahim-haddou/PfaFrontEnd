@@ -21,12 +21,12 @@
     </div>
 </div>
 <mat-list class="liste-container">
-  <mat-list-item class="liste-item" *ngFor= "let element of elementList"> 
+  <mat-list-item class="liste-item" style="display: block;" *ngFor= "let element of elementList">
     <button *ngIf="show" mat-button class="liste-button" (click)="openDetailDialog(element)" >{{element.nom}}</button>
     <button *ngIf="show" mat-mini-fab color="warn" aria-label="Delete" class="fab-delete" (click)="delElement(element)" >
       <mat-icon class="small-icon">delete</mat-icon>
     </button>
   </mat-list-item>
- </mat-list> 
+ </mat-list>
 
 </div>

@@ -16,6 +16,8 @@ import {DataModuleService} from '../datamodule/datamodule.service';
 import {DataElementService} from '../dataelement/dataelement.service';
 import {DatafiliereService} from '../datafiliere/datafiliere.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import {AppRoutingModule} from '../app-routing.module';
+import {BuildpageComponent} from '../buildpage/buildpage.component';
 
 @Component({
   selector: 'app-detailemploi',
@@ -32,19 +34,24 @@ export class DetailemploiComponent implements OnInit {
   moduleList!: Module[];
   selectedModule!: number;
   selectedElement!: number;
+  selectedClasse!: number;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {emploi: Emploi, req: boolean, dataId : number},private dataElementService: DataElementService, private datamoduleService: DataModuleService, private datafiliereService: DatafiliereService,private buildpageService: BuildpageService ,private dataprofService: DataprofService ,private datasalleService: DatasalleService ,private dataClasseService: DataClasseService , private dialogRef: MatDialogRef<DetailemploiComponent>) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {emploi: Emploi, req: boolean, dataId : number},
+              private dataElementService: DataElementService,
+              private datamoduleService: DataModuleService,
+              private datafiliereService: DatafiliereService,
+              private buildpageService: BuildpageService ,
+              private dataprofService: DataprofService ,private datasalleService: DatasalleService ,private dataClasseService: DataClasseService , private dialogRef: MatDialogRef<DetailemploiComponent>) { }
 
   ngOnInit(): void {
     this.emploi = this.data.emploi;
     this.elementList = [];
     this.classeList = [];
     this.moduleList = [];
-    this.profList= [];
-    this.getAllSalles();
+    this.profList = [];
     this.getFiliereModules();
   }
-  
+
   changeModule(): void{
     const x = this.selectedModule;
     this.getModuleElement(x);
@@ -55,11 +62,21 @@ export class DetailemploiComponent implements OnInit {
     this.getElementClasse(x);
     this.getProfesseurElement(x);
   }
+  changeClasse(): void{
+    const x = this.selectedClasse;
+    console.log(x);
+    for (let i = 0; i < this.classeList.length; i++) {
+      if ( this.classeList[i].id == x){
+        this.getAllSalles(this.classeList[i].type, this.classeList[i].maxEtudiant);
+      }
+    }
+  }
 
 
   submit(): void {
     var emp : Empreq;
-    emp = {id: +this.emploi.id!, classeId: +this.emploi.classe.id!, professeurId: +this.emploi.professeur.id!, salleId: +this.emploi.salle.id!, creneauId: +this.emploi.creneau.id!};
+    emp = {id: +this.emploi.id!, classeId: +this.selectedClasse!, professeurId: +this.emploi.professeur.id!, salleId: +this.emploi.salle.id!, creneauId: +this.emploi.creneau.id!};
+    console.log(emp);
     this.buildpageService.updateEmploiDuTemps(emp).subscribe(
       (request: Emploi) => {
         this.data.emploi = request;
@@ -71,9 +88,10 @@ export class DetailemploiComponent implements OnInit {
 
   add(): void{
     var emp : Empreq;
-    emp = {classeId: +this.emploi.classe.id!, professeurId: +this.emploi.professeur.id!, salleId: +this.emploi.salle.id!, creneauId: +this.emploi.creneau.id!};
+    emp = {classeId: +this.selectedClasse!, professeurId: +this.emploi.professeur.id!, salleId: +this.emploi.salle.id!, creneauId: +this.emploi.creneau.id!};
+    console.log(emp);
     this.buildpageService.saveEmploiDuTemps(emp).subscribe(
-        (request : Emploi) => {
+        (request: Emploi) => {
           this.data.emploi = request;
           return Number;
         }
@@ -85,14 +103,18 @@ export class DetailemploiComponent implements OnInit {
   }
 
   del(): void {
+    // tslint:disable-next-line:no-non-null-assertion
     this.buildpageService.deleteEmploiDuTemps(this.emploi.id!).subscribe(
-      (request : String) => {
-        return request;
+      (request: string) => {
+        console.log(request);
+        return Number;
       },
       (error: HttpErrorResponse) => {
-        alert(error.message);
+        console.log(error.message);
+
       }
       );
+    this.close();
   }
 
   close(): void {
@@ -149,10 +171,11 @@ export class DetailemploiComponent implements OnInit {
       );
   }
 
-  public getAllSalles(){
+  public getAllSalles(tp: string, place: number){
     this.salleList = [] ;
-    this.datasalleService.getAllSalles().subscribe(
+    this.datasalleService.getAllSallesByTypeAndPlace(tp, place).subscribe(
         (response: Salle[]) => {
+          console.log(response);
           this.salleList = response;
         },
         (error: HttpErrorResponse) => {
