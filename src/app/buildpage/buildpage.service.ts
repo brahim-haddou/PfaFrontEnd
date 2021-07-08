@@ -23,8 +23,9 @@ export class BuildpageService{
   getFiliereEmploiDuTemps(filiereId: number): Observable<Emploi[]>{
     return this.http.get<Emploi[]>(`${this._url}/filiere/${filiereId}`);
   }
-  deleteFiliereEmploiDuTemps(filiereId: number): Observable<string>{
-    return this.http.delete<string>(`${this._url}/filiere/${filiereId}`);
+  deleteFiliereEmploiDuTemps(filiereId: number): Observable<ArrayBuffer>{
+    // @ts-ignore
+    return this.http.delete<string>(`${this._url}/filiere/${filiereId}`, { responseType: 'text'});
   }
   getSalleEmploiDuTemps(salleId: number): Observable<Emploi[]>{
     return this.http.get<Emploi[]>(`${this._url}/salle/${salleId}`);
@@ -79,7 +80,8 @@ export class BuildpageService{
   createCreneau(creneau: Creneau[]): Observable<Creneau[]> {
     return this.http.post<Creneau[]>(`${environment.apiBaseURL}creneau`, creneau);
   }
-  deleteCreneau(id: number): Observable<string> {
-    return this.http.delete<string>(`${environment.apiBaseURL}creneau/${id}`);
+  deleteCreneau(id: number): Observable<ArrayBuffer> {
+    // @ts-ignore
+    return this.http.delete<string>(`${environment.apiBaseURL}creneau/${id}`, { responseType: 'text'});
   }
 }
