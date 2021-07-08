@@ -100,7 +100,7 @@ export class BuildpageComponent implements OnInit {
     });
     dialog.afterClosed().subscribe(() => {
       console.log(emploi.id);
-      this.reload();
+      this.ngOnInit();
     });
   }
 
@@ -128,7 +128,7 @@ export class BuildpageComponent implements OnInit {
         this.creneau.push({jour: 'Samedi', debut : 0, fin : 0, filiereId: this.dataId});
       }
     }
-    
+
     console.log(this.colcount);
     for (let i = 0; i < this.colcount * 6; i++) {
       console.log(counter);

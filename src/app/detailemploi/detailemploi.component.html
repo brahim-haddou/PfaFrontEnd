@@ -21,7 +21,7 @@
       <div style="flex-direction: column;">
         <mat-form-field appearance="fill" class="selection">
           <mat-label><b>Selectioner la classe :</b></mat-label>
-          <mat-select [(value)]="emploi.classe.id" >
+          <mat-select [(value)]="selectedClasse"  (selectionChange)="changeClasse()">
             <mat-option *ngFor= "let classe of classeList" value={{classe.id}}>{{classe.nom}}</mat-option>
           </mat-select>
         </mat-form-field>

@@ -17,6 +17,9 @@ export class DatasalleService{
   getAllSalles(): Observable<Salle[]>{
     return this.http.get<Salle[]>(this._url);
   }
+  getAllSallesByTypeAndPlace(type: string, place: number): Observable<Salle[]>{
+    return this.http.get<Salle[]>(`${this._url}/${type}/${place}`);
+  }
 
   getSalle(id: number): Observable<Salle>{
     return this.http.get<Salle>( `${this._url}/${id}`);
