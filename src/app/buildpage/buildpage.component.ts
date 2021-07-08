@@ -245,6 +245,14 @@ export class BuildpageComponent implements OnInit {
    }
 
    save(): void {
+    this.buildpageService.excelFiliereEmploiDuTemps(this.dataId).subscribe(
+      (request: Blob) => {
+        return String;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
    }
 
   // tslint:disable-next-line:typedef
