@@ -7,9 +7,9 @@
         <input type="text" [(ngModel)]="col" >
         <button mat-flat-button color="primary" (click)="changeCols()" >OK</button>
         <div style="flex: auto 1 1 ;"></div>
-        <button mat-flat-button color="primary" (click)="submitCrenau()" >Sauvegarder créneau</button>
+        <button mat-flat-button color="primary" style="margin-right: 10px;" (click)="submitCrenau()" >Sauvegarder créneau</button>
     </div>
-    <p class="warning">Attention, le changement de nombre de créneau va réintialiser le tableau !!</p>
+    <p class="warning">Attention, le changement de  créneau va réintialiser le tableau !!</p>
     <div style="height: 55vh; width: 100%; display: flex; flex-direction: row; overflow: auto;">
         <div style="height: 100%; width: 10%;">
             <mat-grid-list cols="1" rowHeight="100px" class="grid">
