@@ -32,7 +32,7 @@ export class BuildpageComponent implements OnInit {
   dataId!: number;
 
 
-  constructor(private buildpageService: BuildpageService,  public dialog: MatDialog, private activatedRoute: ActivatedRoute) {
+  constructor(private buildpageService: BuildpageService,public dialog: MatDialog, private activatedRoute: ActivatedRoute) {
    }
 
    reload() {
@@ -46,18 +46,16 @@ export class BuildpageComponent implements OnInit {
    }
 
    ngOnInit(): void {
-    //this.dataId = this.activatedRoute.snapshot.params.id;
-    this.activatedRoute.queryParams.subscribe(queryParams => {
-
-    });
+    // this.dataId = this.activatedRoute.snapshot.params.id;
+    // this.activatedRoute.queryParams.subscribe(() => {
+    //
+    // });
     this.activatedRoute.params.subscribe(routeParams => {
       this.dataId = routeParams.id;
-      console.log(routeParams.id);
       this.reload();
     });
     this.creneau = [];
     this.colcount = 4;
-    // this.initEmploi();
     this.tableInit(this.colcount);
     this.getCreneau();
   }
@@ -89,17 +87,16 @@ export class BuildpageComponent implements OnInit {
     }
   }*/
 
-  openDetailDialog(emploi : Emploi){
-    var req: boolean = true;
-    var dataId : number = this.dataId;
-    if (emploi.classe.nom == "" && emploi.professeur.nom == "") {
+  openDetailDialog(emploi: Emploi){
+    let req = true;
+    let dataId: number = this.dataId;
+    if (emploi.classe.nom == '' && emploi.professeur.nom == '') {
       req = false;
     }
     const dialog = this.dialog.open(DetailemploiComponent , {
       data: { emploi, req, dataId },
     });
     dialog.afterClosed().subscribe(() => {
-      console.log(emploi.id);
       this.ngOnInit();
     });
   }
@@ -107,7 +104,6 @@ export class BuildpageComponent implements OnInit {
   submitCrenau(): void {
     let counter = 0;
     this.creneau = [];
-    console.log(this.debfinTable)
     for (let l = 0; l < 6 * this.colcount; l++) {
       if (l >= 0 && l < this.colcount) {
         this.creneau.push({jour: 'Lundi', debut : 0, fin : 0, filiereId: this.dataId});
@@ -129,9 +125,7 @@ export class BuildpageComponent implements OnInit {
       }
     }
 
-    console.log(this.colcount);
     for (let i = 0; i < this.colcount * 6; i++) {
-      console.log(counter);
       this.creneau[i].debut = +this.debfinTable[counter].debut;
       this.creneau[i].fin = +this.debfinTable[counter].fin;
       counter++;
@@ -139,19 +133,36 @@ export class BuildpageComponent implements OnInit {
         counter = 0;
       }
     }
-    console.log(this.creneau);
-    this.buildpageService.deleteCreneau(this.dataId).subscribe();
-    this.buildpageService.createCreneau(this.creneau).subscribe(
-      (request: Creneau[]) => {
-        this.creneau = request;
-        this.tableInit(this.colcount);
-        // this.reload();
-        return String;
+    this.buildpageService.deleteFiliereEmploiDuTemps(this.dataId).subscribe(
+      request => {
+        console.log(request);
+        // @ts-ignore
+        this.buildpageService.deleteCreneau(this.dataId).subscribe(
+          request1 => {
+            console.log(request1);
+            this.buildpageService.createCreneau(this.creneau).subscribe(
+              (request2: Creneau[]) => {
+                this.creneau = request2;
+                this.tableInit(this.colcount);
+                // this.reload();
+                return String;
+              },
+              (error: HttpErrorResponse) => {
+                alert(error.message);
+              }
+            );
+            return String;
+          },
+          (error: HttpErrorResponse) => {
+            alert(error.message);
+          });
       },
-      (error: HttpErrorResponse) => {
+      error => {
+        console.log(error.message);
         alert(error.message);
       }
     );
+
   }
 
   tableInit(x: number): void{
@@ -222,8 +233,11 @@ export class BuildpageComponent implements OnInit {
         );
     }
 
-    /*this.emploi.forEach(element => {
+    /*
+    this.emploi.forEach(element => {
       var emp: Empreq;
+      // tslint:disable-next-line:max-line-length
+      // tslint:disable-next-line:max-line-length
       emp = {id : element.id, classeId : element.classe.id, professeurId : element.professeur.id, salleId : element.salle.id, creneauId : element.creneau.id};
       this.buildpageService.saveEmploiDuTemps(emp).subscribe(
         (request: Emploi) => {
@@ -234,7 +248,8 @@ export class BuildpageComponent implements OnInit {
           alert(error.message);
         }
       );
-    });*/
+    });
+    */
 
     this.reload();
   }
@@ -245,14 +260,7 @@ export class BuildpageComponent implements OnInit {
    }
 
    save(): void {
-    this.buildpageService.excelFiliereEmploiDuTemps(this.dataId).subscribe(
-      (request: Blob) => {
-        return String;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
-    );
+     window.location.href = `http://localhost:8081/api/auth/emploiDuTemps/filiere/${this.dataId}/excel`;
    }
 
   // tslint:disable-next-line:typedef
@@ -263,7 +271,6 @@ export class BuildpageComponent implements OnInit {
         if (response.length !== 0){
           this.creneau = response;
           this.colcount = this.numCol(this.creneau);
-          console.log(this.creneau);
           this.tableInit(this.colcount);
           this.getFiliereEmploiDuTemps(this.dataId);
         }
@@ -301,6 +308,7 @@ export class BuildpageComponent implements OnInit {
   }
   // TODO: merge Creneau with FiliereEmploi
   mergeCreneauwithFiliereEmploi(empl: Emploi[], emplFiliere: Emploi[]): Emploi[] {
+    // tslint:disable-next-line:prefer-for-of
     for (let l = 0; l < emplFiliere.length; l++){
       for (let n = 0; n < empl.length; n++){
         if (
