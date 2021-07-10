@@ -14,7 +14,7 @@
                     <input matInput type="password" placeholder="Type your Password">
                 </mat-form-field>
                 <div id="passforget" class="field"><a href="https://www.google.com/" target="_blank">Forgot Password ?</a></div>
-                <button mat-flat-button color="accent" class="field">Sign in</button>
+                <button mat-flat-button color="accent" class="field" (click)="login()">Sign in</button>
             </div>
         </mat-tab>
         <mat-tab label="Sign up">
@@ -41,9 +41,9 @@
                     <mat-label>Confirm your Password</mat-label>
                     <input matInput type="password" placeholder="Re-enter your Password">
                 </mat-form-field>
-                <button mat-flat-button color="accent" class="field">Sign up</button>
+                <button mat-flat-button color="accent" class="field" (click)="signup()">Sign up</button>
             </div>
         </mat-tab>
     </mat-tab-group>
-      
+
 </div>

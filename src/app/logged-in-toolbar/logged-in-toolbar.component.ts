@@ -16,7 +16,7 @@ export class LoggedInToolbarComponent implements OnInit {
   constructor(private datafiliereService: DatafiliereService) { }
 
   ngOnInit(): void {
-    this.getAllFilieres();
+    // this.getAllFilieres();
   }
 
   reload() {
@@ -24,16 +24,16 @@ export class LoggedInToolbarComponent implements OnInit {
     setTimeout(() => this.show = true);
   }
 
-  public getAllFilieres(){
-    this.listFIliere = [] ;
-    this.datafiliereService.getAllFilieres().subscribe(
-        (response: Filiere[]) => {
-          this.listFIliere = response;
-        },
-        (error: HttpErrorResponse) => {
-          alert(error.message);
-        }
-      );
-  }
+  // public getAllFilieres(){
+  //   this.listFIliere = [] ;
+  //   this.datafiliereService.getAllFilieres().subscribe(
+  //       (response: Filiere[]) => {
+  //         this.listFIliere = response;
+  //       },
+  //       (error: HttpErrorResponse) => {
+  //         alert(error.message);
+  //       }
+  //     );
+  // }
 
 }

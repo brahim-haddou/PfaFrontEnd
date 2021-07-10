@@ -57,7 +57,9 @@ import { DetailclasseComponent } from './detailclasse/detailclasse.component';
 import { DatasalleComponent } from './datasalle/datasalle.component';
 import { AddsalleComponent } from './addsalle/addsalle.component';
 import { DetailsalleComponent } from './detailsalle/detailsalle.component';
-import { DetailemploiComponent } from './detailemploi/detailemploi.component'; 
+import { DetailemploiComponent } from './detailemploi/detailemploi.component';
+import {NgxWebstorageModule} from 'ngx-webstorage';
+import {ToastrModule} from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -122,7 +124,9 @@ import { DetailemploiComponent } from './detailemploi/detailemploi.component';
     MatAutocompleteModule,
     MatChipsModule,
     MatGridListModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxWebstorageModule.forRoot(),
+    ToastrModule.forRoot(),
   ],
   providers: [
     SideNavService,

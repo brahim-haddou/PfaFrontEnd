@@ -11,6 +11,7 @@ export class NotLoggedInToolbarComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {}
 
+  // tslint:disable-next-line:typedef
   openLoginDialog() {
     this.dialog.open(LogincardComponent);
   }
