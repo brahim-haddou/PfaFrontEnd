@@ -1,17 +1,17 @@
 <div mat-dialog-content>
-    <mat-tab-group dynamicHeight mat-stretch-tabs mat-align-tabs="center">
+    <mat-tab-group dynamicHeight mat-stretch-tabs mat-align-tabs="center" [(selectedIndex)]="selectedTab">
         <mat-tab label="Sign in">
             <h1>Sign in</h1>
             <div class="container">
                 <mat-form-field class="field" appearance="standard" floatLabel="always">
-                    <mat-label>Email Adress</mat-label>
-                    <input matInput type="email" placeholder="Type your Email">
-                    <mat-icon matPrefix>alternate_email</mat-icon>
+                    <mat-label>Username</mat-label>
+                    <input matInput type="email" placeholder="Type your Username" [(ngModel)]="usernameSin"> 
+                    <mat-icon matPrefix>person</mat-icon>
                 </mat-form-field>
                 <mat-form-field class="field" appearance="standard" floatLabel="always">
                     <mat-icon matPrefix>lock</mat-icon>
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" placeholder="Type your Password">
+                    <input matInput type="password" placeholder="Type your Password" [(ngModel)]="passSin">
                 </mat-form-field>
                 <div id="passforget" class="field"><a href="https://www.google.com/" target="_blank">Forgot Password ?</a></div>
                 <button mat-flat-button color="accent" class="field" (click)="login()">Sign in</button>
@@ -22,24 +22,28 @@
             <div class="container">
                 <mat-form-field class="nameField" appearance="standard">
                     <mat-label>First Name</mat-label>
-                    <input matInput placeholder="Enter your First Name">
+                    <input matInput placeholder="Enter your First Name" [(ngModel)]="fNameSup">
                 </mat-form-field>
                 <mat-form-field class="nameField" appearance="standard">
                     <mat-label>Last Name</mat-label>
-                    <input matInput placeholder="Enter your Last Name">
+                    <input matInput placeholder="Enter your Last Name" [(ngModel)]="lNameSup">
+                </mat-form-field>
+                <mat-form-field class="nameField" appearance="standard">
+                    <mat-label>Username</mat-label>
+                    <input matInput placeholder="Enter your Username" [(ngModel)]="usernameSup">
                 </mat-form-field>
                 <mat-form-field class="field" appearance="standard">
                     <mat-label>Email Adress</mat-label>
-                    <input matInput type="email" placeholder="Enter your Email Adress">
+                    <input matInput type="email" placeholder="Enter your Email Adress" [(ngModel)]="emailSup">
                     <mat-hint>example@email.com</mat-hint>
                 </mat-form-field>
                 <mat-form-field class="field" appearance="standard">
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" placeholder="Enter your Password">
+                    <input matInput type="password" placeholder="Enter your Password" [(ngModel)]="passSup">
                 </mat-form-field>
                 <mat-form-field class="field" appearance="standard">
                     <mat-label>Confirm your Password</mat-label>
-                    <input matInput type="password" placeholder="Re-enter your Password">
+                    <input matInput type="password" placeholder="Re-enter your Password" [(ngModel)]="passconfSup">
                 </mat-form-field>
                 <button mat-flat-button color="accent" class="field" (click)="signup()">Sign up</button>
             </div>

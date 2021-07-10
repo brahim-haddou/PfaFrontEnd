@@ -13,11 +13,24 @@ import {ToastrService} from 'ngx-toastr';
 })
 export class LogincardComponent implements OnInit {
 
-  signupRequestPayload: SignupRequestPayload;
-  loginRequestPayload: LoginRequestPayload;
+  signupRequestPayload!: SignupRequestPayload;
+  loginRequestPayload!: LoginRequestPayload;
+
+  fNameSup!:string;
+  lNameSup!:string;
+  usernameSup!:string;
+  emailSup!:string;
+  passSup!:string;
+  passconfSup!:string;
+
+  usernameSin!:string;
+  passSin!:string;
+
+  selectedTab: number = 0;
+
   // loginResponse: LoginResponse;
   constructor(private loginCardService: LoginCardService, private router: Router, private toastr: ToastrService) {
-    this.signupRequestPayload = {
+    /*this.signupRequestPayload = {
       firstName: 'test',
       lastName: 'test',
       username: 'test',
@@ -27,7 +40,7 @@ export class LogincardComponent implements OnInit {
     this.loginRequestPayload = {
       username: 'test',
       password: 'test'
-    };
+    };*/
   }
 
   ngOnInit(): void {
@@ -35,30 +48,59 @@ export class LogincardComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   signup() {
-    this.loginCardService.signup(this.signupRequestPayload).subscribe(
-      data => {
-      console.log(data);
-      this.toastr.success('SignUp Successful! Please Check Your Email To Activate Your Account');
-    },
-    error => {
-      console.log(error);
-      this.toastr.error('SignUp Failed! Please Try Again');
-    });
+    if ((typeof this.fNameSup != 'undefined') &&
+    (typeof this.lNameSup != 'undefined') &&
+    (typeof this.usernameSup != 'undefined') &&
+    (typeof this.emailSup != 'undefined') &&
+    (typeof this.passSup != 'undefined') &&
+    (typeof this.passconfSup != 'undefined') &&
+    (this.passSup == this.passconfSup)) {
+      this.signupRequestPayload = {
+        firstName: this.fNameSup,
+        lastName: this.lNameSup,
+        username: this.usernameSup,
+        email: this.emailSup,
+        password: this.passSup
+      };
+      this.loginCardService.signup(this.signupRequestPayload).subscribe(
+        data => {
+        console.log(data);
+        this.toastr.success('SignUp Successful! Please Check Your Email To Activate Your Account');
+        this.selectedTab = 1;
+      },
+      error => {
+        console.log(error);
+        this.toastr.error('SignUp Failed! Please Try Again');
+      });
+    }else {
+      this.toastr.error("Veuiller verifier vos informations")
+    }
   }
 
 
   // tslint:disable-next-line:typedef
   login() {
-    this.loginCardService.login(this.loginRequestPayload).subscribe(
-      data => {
-        console.log(data);
-        this.router.navigate(['/data']);
-        this.toastr.success('Login Successful');
-      },
-      error => {
-        console.log(error);
-        this.router.navigate(['/']);
-        this.toastr.error('Login Failed! Please Try Again');
-      });
+    if ((typeof this.usernameSin != 'undefined') &&
+    (typeof this.passSin != 'undefined')){
+
+      this.loginRequestPayload = {
+        username: this.usernameSin,
+        password: this.passSin
+      };
+
+      this.loginCardService.login(this.loginRequestPayload).subscribe(
+        data => {
+          console.log(data);
+          this.router.navigate(['/data']);
+          this.toastr.success('Login Successful');
+        },
+        error => {
+          console.log(error);
+          this.router.navigate(['/']);
+          this.toastr.error('Login Failed! Please Try Again');
+        });
+    }else{
+      this.toastr.error("Veuiller remplir tout les champs")
+    }
   }
 }
