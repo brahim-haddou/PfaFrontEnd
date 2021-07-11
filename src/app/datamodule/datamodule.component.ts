@@ -31,7 +31,7 @@ export class DatamoduleComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.dataId = this.activatedRoute.snapshot.params['id'];
+    this.dataId = this.activatedRoute.snapshot.params.id;
     this.getFiliereModules();
   }
 
@@ -41,7 +41,7 @@ export class DatamoduleComponent implements OnInit {
   }
 
   openFormDialog(){
-    const dataId = this.dataId
+    const dataId = this.dataId;
     const dialog = this.dialog.open(AddmoduleComponent, {
       data: { dataId },
     });
@@ -52,8 +52,9 @@ export class DatamoduleComponent implements OnInit {
   }
 
   openDetailDialog(module: Module){
+    const dataId = this.dataId;
     const dialog = this.dialog.open(DetailmoduleComponent , {
-      data: { module },
+      data: { module, dataId },
     });
     dialog.afterClosed().subscribe(() => {
       this.getFiliereModules();

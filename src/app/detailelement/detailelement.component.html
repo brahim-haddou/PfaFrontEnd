@@ -17,14 +17,21 @@
         <mat-select [formControl]="objectCtrl" multiple>
           <mat-option *ngFor="let object of moduleList" [value]="object">{{object.nom}}</mat-option>
         </mat-select>
-      </mat-form-field>      
+      </mat-form-field>
 
     <div>
-         <p><b>List des classes du l'element :</b></p>
+         <p><b>List des classes de l'element :</b></p>
         <mat-chip-list>
             <mat-chip *ngFor= "let classe of classeList">{{classe.nom}}</mat-chip>
-        </mat-chip-list>          
+        </mat-chip-list>
     </div>
+
+  <div>
+    <p><b>List des professeur de l'element :</b></p>
+    <mat-chip-list>
+      <mat-chip *ngFor= "let classe of profElementList" >{{classe.nom}}</mat-chip>
+    </mat-chip-list>
+  </div>
     <div class="buttons">
         <button mat-flat-button color="primary" (click)="submit()">Modifier</button>
         <button mat-flat-button color="alert" (click)="close()">Annuler</button>

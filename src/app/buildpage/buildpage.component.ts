@@ -264,7 +264,7 @@ export class BuildpageComponent implements OnInit {
    }
 
    save(): void {
-     window.location.href = `http://localhost:8081/api/auth/emploiDuTemps/filiere/${this.dataId}/excel`;
+     window.location.href = `http://localhost:8081/api/emploiDuTemps/filiere/${this.dataId}/excel`;
    }
 
   // tslint:disable-next-line:typedef

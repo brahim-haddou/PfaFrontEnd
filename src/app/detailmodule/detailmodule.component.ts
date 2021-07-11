@@ -19,15 +19,15 @@ export class DetailmoduleComponent implements OnInit {
   filiereList: Filiere[] = [];
   elementList!: Element[];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {module: Module},private dataModuleService: DataModuleService ,private datafiliereService: DatafiliereService, private dialogRef: MatDialogRef<DetailmoduleComponent>) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {module: Module, dataId: number }, private dataModuleService: DataModuleService ,private datafiliereService: DatafiliereService, private dialogRef: MatDialogRef<DetailmoduleComponent>) { }
 
   ngOnInit(): void {
     this.getElements();
-    //this.getAllFilieres();
   }
 
   submit(): void {
-    this.module = {id: this.data.module.id ,nom: this.data.module.nom, filiereId: this.data.module.filiereId};
+    this.module = {id: this.data.module.id , nom: this.data.module.nom, filiereId: this.data.dataId};
+    console.log(this.module);
     this.updateModule(this.module);
     this.dialogRef.close();
   }

@@ -19,25 +19,30 @@ export class DetailelementComponent implements OnInit {
 
   element!: Element;
   moduleList!: Prof[];
+  profElementList!: Prof[];
   classeList!: Classe[];
   selectedProf!: Prof[];
 
   objectCtrl = new FormControl();
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {element: Element},private dataprofService: DataprofService ,private dataElementService: DataElementService, private dialogRef: MatDialogRef<DetailelementComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {element: Element, dataId: number },private dataprofService: DataprofService ,private dataElementService: DataElementService, private dialogRef: MatDialogRef<DetailelementComponent>) {
    }
 
   ngOnInit(): void {
     this.getClasses();
     this.getAllModules();
+    this.getAllElementProf(Number(this.data.element.id));
   }
 
   submit(): void {
-    console.log(this.objectCtrl.value);
 
-    this.element = {id: this.data.element.id ,nom: this.data.element.nom, moduleId: this.data.element.moduleId};
+    const result = this.objectCtrl.value.map((a: { id: any; }) => a.id);
+    this.element = {id: this.data.element.id , nom: this.data.element.nom, moduleId: this.data.dataId};
     this.updateElement(this.element);
+    for (let i = 0; i < result.length; i++) {
+      this.addProfToElement(Number(this.data.element.id), Number(result[i]));
+    }
     this.dialogRef.close();
   }
 
@@ -57,11 +62,47 @@ export class DetailelementComponent implements OnInit {
     );
   }
 
+  addProfToElement(id: number , pid: number): void{
+    this.dataElementService.addProfesseurElement(id, pid).subscribe(
+      request => {
+        console.log(request);
+        return String;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  deleteProfFromElement(pid: number): void{
+    this.dataElementService.deleteProfesseurElement(Number(this.data.element.id), pid).subscribe(
+      request => {
+        console.log(request);
+        return String;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
   getAllModules(): void {
     this.moduleList = [];
     this.dataprofService.getAllProfesseurs().subscribe(
       (response: Prof[]) => {
         this.moduleList = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  getAllElementProf(id: number): void {
+    this.profElementList = [];
+    this.dataElementService.getProfesseurElement(id).subscribe(
+      (response: Prof[]) => {
+        this.profElementList = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);

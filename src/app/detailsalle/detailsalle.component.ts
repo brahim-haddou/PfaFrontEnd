@@ -21,7 +21,7 @@ export class DetailsalleComponent implements OnInit {
   }
 
   save(): void{
-    
+    window.location.href = `http://localhost:8081/api/emploiDuTemps/salle/${this.data.salle.id}/excel`;
   }
 
   submit(): void {

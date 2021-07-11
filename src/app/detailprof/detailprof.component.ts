@@ -23,11 +23,11 @@ export class DetailprofComponent implements OnInit {
   }
 
   save(): void {
-    
+    window.location.href = `http://localhost:8081/api/emploiDuTemps/professeur/${this.data.prof.id}/excel`;
   }
 
   submit(): void {
-    this.prof = {id: this.data.prof.id ,nom: this.data.prof.nom};
+    this.prof = {id: this.data.prof.id , nom: this.data.prof.nom};
     this.updateProfesseur(this.prof);
     this.dialogRef.close();
   }
@@ -47,7 +47,7 @@ export class DetailprofComponent implements OnInit {
       }
     );
   }
-  
+
   getProfesseurElements(prof: Prof): void {
     this.elementList= [];
     this.dataprofService.getProfesseurElements(this.data.prof).subscribe(

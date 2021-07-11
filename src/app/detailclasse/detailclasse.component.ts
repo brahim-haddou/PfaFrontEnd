@@ -17,14 +17,14 @@ export class DetailclasseComponent implements OnInit {
   classe!: Classe;
   elementList: Element[] = [];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {classe: Classe},private dataClasseService: DataClasseService ,private dataElementService: DataElementService, private dialogRef: MatDialogRef<DetailclasseComponent>) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {classe: Classe, dataId: number }, private dataClasseService: DataClasseService ,private dataElementService: DataElementService, private dialogRef: MatDialogRef<DetailclasseComponent>) { }
 
   ngOnInit(): void {
     //this.getAllElements();
   }
 
   submit(): void {
-    this.classe = {id: this.data.classe.id ,nom: this.data.classe.nom,type : this.data.classe.type,maxEtudiant : this.data.classe.maxEtudiant , elementId: this.data.classe.elementId};
+    this.classe = {id: this.data.classe.id ,nom: this.data.classe.nom,type : this.data.classe.type,maxEtudiant : this.data.classe.maxEtudiant , elementId: this.data.dataId};
     this.updateClasse(this.classe);
     this.dialogRef.close();
   }

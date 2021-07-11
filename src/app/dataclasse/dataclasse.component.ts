@@ -41,7 +41,7 @@ export class DataclasseComponent implements OnInit {
   }
 
   openFormDialog(){
-    const dataId = this.dataId
+    const dataId = this.dataId;
     const dialog = this.dialog.open(AddclasseComponent, {
       data: { dataId },
     });
@@ -52,8 +52,9 @@ export class DataclasseComponent implements OnInit {
   }
 
   openDetailDialog(classe : Classe){
+    const dataId = this.dataId;
     const dialog = this.dialog.open(DetailclasseComponent , {
-      data: { classe },
+      data: { classe, dataId },
     });
     dialog.afterClosed().subscribe(() => {
       this.getElementClasse();

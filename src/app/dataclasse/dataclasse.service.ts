@@ -21,11 +21,11 @@ export class DataClasseService{
   getClasse(classe: Classe): Observable<Classe>{
     return this.http.get<Classe>( `${this._url}/${classe.id}`);
   }
-  createClasse(classe: Classe) : Observable<Classe>{
+  createClasse(classe: Classe): Observable<Classe>{
     return this.http.post<Classe>(this._url, classe);
   }
 
-  updateClasse(classe: Classe) : Observable<Classe>{
+  updateClasse(classe: Classe): Observable<Classe>{
     return this.http.put<Classe>(this._url, classe);
   }
   deleteClasse(classe: Classe): Observable<string>{

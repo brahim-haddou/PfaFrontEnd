@@ -40,9 +40,20 @@ export class DataElementService{
   getClasses(element: Element): Observable<Classe[]>{
     return this.http.get<Classe[]>( `${this._url}/${element.id}/classes`);
   }
-  
+
   getProfesseurElement(id: number): Observable<Prof[]>{
     return this.http.get<Prof[]>( `${this._url}/${id}/professeurs`);
+  }
+
+  addProfesseurElement(id: number, pid: number): Observable<ArrayBuffer>{
+    // @ts-ignore
+    return this.http.post<string>( `${this._url}/${id}/professeurs/${pid}`, null,  { responseType: 'text'});
+  }
+
+
+  deleteProfesseurElement(id: number, pid: number): Observable<ArrayBuffer>{
+    // @ts-ignore
+    return this.http.delete<string>( `${this._url}/${id}/professeurs/${pid}`,  { responseType: 'text'});
   }
 
 
