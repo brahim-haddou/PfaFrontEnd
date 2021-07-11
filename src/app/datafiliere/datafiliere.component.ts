@@ -3,9 +3,11 @@ import { Filiere } from '../DBModels/filiere.model';
 import { SideNavService } from '../side-nav.service';
 import {MatDialog} from '@angular/material/dialog';
 import { AddfiliereComponent } from '../addfiliere/addfiliere.component';
-import { DetailfiliereComponent } from '../detailfiliere/detailfiliere.component'; 
+import { DetailfiliereComponent } from '../detailfiliere/detailfiliere.component';
 import {HttpErrorResponse} from '@angular/common/http';
 import {DatafiliereService} from './datafiliere.service';
+import {LoginCardService} from '../logincard/logincard.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-datafiliere',
@@ -19,7 +21,10 @@ export class DatafiliereComponent implements OnInit {
 
   searchText!: string;
 
-  constructor(private datafiliereService: DatafiliereService, private sideNavService: SideNavService, public dialog: MatDialog) {
+  constructor(private loginCardService: LoginCardService, private router: Router, private datafiliereService: DatafiliereService, private sideNavService: SideNavService, public dialog: MatDialog) {
+    if (!loginCardService.isLoggedIn()) {
+      router.navigate(['/']);
+    }
     this.elementList = [] ;
    }
 
@@ -33,7 +38,7 @@ export class DatafiliereComponent implements OnInit {
   }
 
 
-  openFormDialog(){  
+  openFormDialog(){
     const dialog = this.dialog.open(AddfiliereComponent);
     dialog.afterClosed().subscribe(() => {
       this.getAllFilieres();

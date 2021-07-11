@@ -28,19 +28,8 @@ export class LogincardComponent implements OnInit {
 
   selectedTab: number = 0;
 
-  // loginResponse: LoginResponse;
   constructor(private loginCardService: LoginCardService, private router: Router, private toastr: ToastrService) {
-    /*this.signupRequestPayload = {
-      firstName: 'test',
-      lastName: 'test',
-      username: 'test',
-      email: 'test@test.com',
-      password: 'test'
-    };
-    this.loginRequestPayload = {
-      username: 'test',
-      password: 'test'
-    };*/
+
   }
 
   ngOnInit(): void {
@@ -66,14 +55,14 @@ export class LogincardComponent implements OnInit {
         data => {
         console.log(data);
         this.toastr.success('SignUp Successful! Please Check Your Email To Activate Your Account');
-        this.selectedTab = 1;
       },
       error => {
         console.log(error);
         this.toastr.error('SignUp Failed! Please Try Again');
       });
+      this.selectedTab = 0;
     }else {
-      this.toastr.error("Veuiller verifier vos informations")
+      this.toastr.error('Veuiller verifier vos informations');
     }
   }
 
@@ -100,7 +89,13 @@ export class LogincardComponent implements OnInit {
           this.toastr.error('Login Failed! Please Try Again');
         });
     }else{
-      this.toastr.error("Veuiller remplir tout les champs")
+      this.toastr.error('Veuiller remplir tout les champs');
     }
+  }
+  // tslint:disable-next-line:typedef
+  logout(){
+    this.loginCardService.logout();
+    this.router.navigate(['/']);
+    this.toastr.success('You Are Logged out');
   }
 }

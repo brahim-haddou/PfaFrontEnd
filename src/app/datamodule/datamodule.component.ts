@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Module } from '../DBModels/module.model';
 import { SideNavService } from '../side-nav.service';
 import {MatDialog} from '@angular/material/dialog';
 import {HttpErrorResponse} from '@angular/common/http';
 import {DatafiliereService} from '../datafiliere/datafiliere.service';
 import {DataModuleService} from './datamodule.service';
-import { AddmoduleComponent } from '../addmodule/addmodule.component'; 
-import { DetailmoduleComponent } from '../detailmodule/detailmodule.component'; 
+import { AddmoduleComponent } from '../addmodule/addmodule.component';
+import { DetailmoduleComponent } from '../detailmodule/detailmodule.component';
+import {LoginCardService} from '../logincard/logincard.service';
 
 @Component({
   selector: 'app-datamodule',
@@ -22,7 +23,10 @@ export class DatamoduleComponent implements OnInit {
 
   dataId!: number;
 
-  constructor(private datamoduleService: DataModuleService, private datafiliereService: DatafiliereService,private sideNavService: SideNavService, private activatedRoute: ActivatedRoute,  public dialog: MatDialog) {
+  constructor(private loginCardService: LoginCardService, private router: Router, private datamoduleService: DataModuleService, private datafiliereService: DatafiliereService,private sideNavService: SideNavService, private activatedRoute: ActivatedRoute,  public dialog: MatDialog) {
+    if (!loginCardService.isLoggedIn()) {
+      router.navigate(['/']);
+    }
     this.elementList = [];
    }
 
@@ -36,7 +40,7 @@ export class DatamoduleComponent implements OnInit {
     setTimeout(() => this.show = true);
   }
 
-  openFormDialog(){  
+  openFormDialog(){
     const dataId = this.dataId
     const dialog = this.dialog.open(AddmoduleComponent, {
       data: { dataId },
@@ -82,6 +86,6 @@ export class DatamoduleComponent implements OnInit {
       );
       this.reload();
   }
-  
+
 
 }

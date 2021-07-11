@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Classe } from '../DBModels/classe.model';
 import { SideNavService } from '../side-nav.service';
 import {HttpErrorResponse} from '@angular/common/http';
 import {DataElementService} from '../dataelement/dataelement.service';
 import {DataClasseService} from './dataclasse.service';
 import { MatDialog } from '@angular/material/dialog';
-import { AddclasseComponent } from '../addclasse/addclasse.component'; 
-import { DetailclasseComponent } from '../detailclasse/detailclasse.component'; 
+import { AddclasseComponent } from '../addclasse/addclasse.component';
+import { DetailclasseComponent } from '../detailclasse/detailclasse.component';
+import {LoginCardService} from '../logincard/logincard.service';
+import {BuildpageService} from '../buildpage/buildpage.service';
 
 @Component({
   selector: 'app-dataclasse',
@@ -21,8 +23,10 @@ export class DataclasseComponent implements OnInit {
   searchText!: string;
 
   dataId!: number;
-
-  constructor(private dataclasseservice: DataClasseService, private dataElementService: DataElementService,private sideNavService: SideNavService, private activatedRoute: ActivatedRoute,  public dialog: MatDialog) {
+  constructor(private loginCardService: LoginCardService, private router: Router, private dataclasseservice: DataClasseService, private dataElementService: DataElementService,private sideNavService: SideNavService, private activatedRoute: ActivatedRoute,  public dialog: MatDialog) {
+    if (!loginCardService.isLoggedIn()) {
+      router.navigate(['/']);
+    }
     this.elementList = [];
   }
 

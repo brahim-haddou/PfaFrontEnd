@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Element } from '../DBModels/element.model';
 import { SideNavService } from '../side-nav.service';
 import {HttpErrorResponse} from '@angular/common/http';
@@ -8,6 +8,8 @@ import {DataModuleService} from '../datamodule/datamodule.service';
 import { AddelementComponent } from '../addelement/addelement.component';
 import { DetailelementComponent } from '../detailelement/detailelement.component';
 import { MatDialog } from '@angular/material/dialog';
+import {LoginCardService} from '../logincard/logincard.service';
+import {DataClasseService} from '../dataclasse/dataclasse.service';
 
 @Component({
   selector: 'app-dataelement',
@@ -22,11 +24,12 @@ export class DataelementComponent implements OnInit {
 
   dataId!: number;
 
-
-  constructor(private datamoduleService: DataModuleService, private dataElementService: DataElementService,private sideNavService: SideNavService, private activatedRoute: ActivatedRoute,  public dialog: MatDialog) {
+  constructor(private loginCardService: LoginCardService, private router: Router,private datamoduleService: DataModuleService, private dataElementService: DataElementService,private sideNavService: SideNavService, private activatedRoute: ActivatedRoute,  public dialog: MatDialog) {
+    if (!loginCardService.isLoggedIn()) {
+      router.navigate(['/']);
+    }
     this.elementList = [];
-   }
-
+  }
 
   ngOnInit(): void {
     this.dataId = this.activatedRoute.snapshot.params['id'];

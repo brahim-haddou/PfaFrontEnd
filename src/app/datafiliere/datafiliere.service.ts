@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Filiere } from '../DBModels/filiere.model';
 import { Module } from '../DBModels/module.model';
 import { environment } from 'src/environments/environment';
@@ -22,11 +22,11 @@ export class DatafiliereService{
   getFiliere(filiere: Filiere): Observable<Filiere>{
     return this.http.get<Filiere>( `${this._url}/${filiere.id}`);
   }
-  createFiliere(filiere: Filiere) : Observable<Filiere>{
+  createFiliere(filiere: Filiere): Observable<Filiere>{
     return this.http.post<Filiere>(this._url, filiere);
   }
 
-  updateFiliere(filiere: Filiere) : Observable<Filiere>{
+  updateFiliere(filiere: Filiere): Observable<Filiere>{
     return this.http.put<Filiere>(this._url, filiere);
   }
   deleteFiliere(filiere: Filiere): Observable<string>{

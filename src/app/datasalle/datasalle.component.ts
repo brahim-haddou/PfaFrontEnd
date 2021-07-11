@@ -4,8 +4,10 @@ import { SideNavService } from '../side-nav.service';
 import {MatDialog} from '@angular/material/dialog';
 import {HttpErrorResponse} from '@angular/common/http';
 import { AddsalleComponent } from '../addsalle/addsalle.component';
-import { DetailsalleComponent } from '../detailsalle/detailsalle.component'; 
+import { DetailsalleComponent } from '../detailsalle/detailsalle.component';
 import {DatasalleService} from './datasalle.service';
+import {LoginCardService} from '../logincard/logincard.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-datasalle',
@@ -19,13 +21,16 @@ export class DatasalleComponent implements OnInit {
 
   searchText!: string;
 
-  constructor(private datasalleService: DatasalleService, private sideNavService: SideNavService, public dialog: MatDialog, private cdr: ChangeDetectorRef) {
+  constructor(private loginCardService: LoginCardService, private router: Router, private datasalleService: DatasalleService, private sideNavService: SideNavService, public dialog: MatDialog, private cdr: ChangeDetectorRef) {
+    if (!loginCardService.isLoggedIn()) {
+      router.navigate(['/']);
+    }
     this.elementList = [] ;
    }
 
   ngOnInit(): void {
     this.getAllSalles();
-    
+
 
     this.elementList.forEach(element => {
       const index = this.elementList.indexOf(element);
@@ -85,7 +90,7 @@ export class DatasalleComponent implements OnInit {
       if (this.elementList[i].nom == null) {
         delete this.elementList[i];
         this.elementList.splice(i-1,1);
-      }      
+      }
     }*/
     this.reload();
   }

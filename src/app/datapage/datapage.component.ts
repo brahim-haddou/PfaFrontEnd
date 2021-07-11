@@ -3,6 +3,8 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { SideNavService } from '../side-nav.service';
 import {MatDialog} from '@angular/material/dialog';
 import { StartformComponent } from '../startform/startform.component';
+import {LoginCardService} from '../logincard/logincard.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-datapage',
@@ -14,7 +16,12 @@ export class DatapageComponent implements OnInit, AfterViewInit {
   @ViewChild('sidenav')
   public sidenav!: MatSidenav;
 
-  constructor(private sideNavService: SideNavService, public dialog: MatDialog) { }
+  // tslint:disable-next-line:max-line-length
+  constructor(private loginCardService: LoginCardService, private router: Router, private sideNavService: SideNavService, public dialog: MatDialog) {
+    if (!loginCardService.isLoggedIn()) {
+      router.navigate(['/']);
+    }
+  }
 
   openLoginDialog() {
     this.dialog.open(StartformComponent);

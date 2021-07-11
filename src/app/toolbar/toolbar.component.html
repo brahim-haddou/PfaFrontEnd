@@ -1,6 +1,13 @@
 <mat-toolbar style="overflow: visible;" style="height: 9%; background-color: #424242; ">
-  <app-not-logged-in-toolbar class="content"></app-not-logged-in-toolbar>
-  <app-logged-in-toolbar class="content"  style="display: none;"></app-logged-in-toolbar>
+
+
+
   <app-logged-phone-in-toolbar class="content" style="display: none;"></app-logged-phone-in-toolbar>
+
+  <app-logged-in-toolbar *ngIf="show; else elseTemplate" class="content"  ></app-logged-in-toolbar>
+  <ng-template #elseTemplate>
+    <app-not-logged-in-toolbar  class="content" ></app-not-logged-in-toolbar>
+  </ng-template>
+
 </mat-toolbar>
 

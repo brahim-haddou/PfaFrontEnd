@@ -6,7 +6,8 @@ import {HttpErrorResponse} from '@angular/common/http';
 import {BuildpageService} from './buildpage.service';
 import { DetailemploiComponent } from '../detailemploi/detailemploi.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {LoginCardService} from '../logincard/logincard.service';
 
 interface Debutfin {
   debut: number;
@@ -32,10 +33,13 @@ export class BuildpageComponent implements OnInit {
   dataId!: number;
 
 
-  constructor(private buildpageService: BuildpageService,public dialog: MatDialog, private activatedRoute: ActivatedRoute) {
-   }
+  constructor(private loginCardService: LoginCardService, private router: Router, private buildpageService: BuildpageService,public dialog: MatDialog, private activatedRoute: ActivatedRoute) {
+    if (!loginCardService.isLoggedIn()) {
+      router.navigate(['/']);
+    }
+  }
 
-   reload() {
+  reload() {
     this.show = false;
     setTimeout(() => this.show = true);
   }

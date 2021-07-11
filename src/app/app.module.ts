@@ -39,7 +39,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import { StartformComponent } from './startform/startform.component';
 import { BuildpageComponent } from './buildpage/buildpage.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { DatafiliereComponent } from './datafiliere/datafiliere.component';
 import { AddprofComponent } from './addprof/addprof.component';
 import { DetailprofComponent } from './detailprof/detailprof.component';
@@ -60,6 +60,7 @@ import { DetailsalleComponent } from './detailsalle/detailsalle.component';
 import { DetailemploiComponent } from './detailemploi/detailemploi.component';
 import {NgxWebstorageModule} from 'ngx-webstorage';
 import {ToastrModule} from 'ngx-toastr';
+import {TokenInterceptor} from './token-interceptor';
 
 @NgModule({
   declarations: [
@@ -129,6 +130,11 @@ import {ToastrModule} from 'ngx-toastr';
     ToastrModule.forRoot(),
   ],
   providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
     SideNavService,
   ],
   bootstrap: [AppComponent]

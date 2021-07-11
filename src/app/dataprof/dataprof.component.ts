@@ -6,6 +6,8 @@ import { AddprofComponent } from '../addprof/addprof.component';
 import {HttpErrorResponse} from '@angular/common/http';
 import { DetailprofComponent } from '../detailprof/detailprof.component';
 import {DataprofService} from './dataprof.service';
+import {LoginCardService} from '../logincard/logincard.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dataprof',
@@ -19,14 +21,17 @@ export class DataprofComponent implements OnInit {
 
   searchText!: string;
 
-  constructor(private dataprofService: DataprofService, private sideNavService: SideNavService, public dialog: MatDialog, private cdr: ChangeDetectorRef) {
+  constructor(private loginCardService: LoginCardService, private router: Router, private dataprofService: DataprofService, private sideNavService: SideNavService, public dialog: MatDialog, private cdr: ChangeDetectorRef) {
+    if (!loginCardService.isLoggedIn()) {
+      router.navigate(['/']);
+    }
     this.elementList = [] ;
    }
 
   ngOnInit(): void {
     this.getAllProfesseurs();
   }
-  
+
   reload() {
     this.show = false;
     setTimeout(() => this.show = true);
@@ -77,7 +82,7 @@ export class DataprofComponent implements OnInit {
       if (this.elementList[i].id == 0) {
         delete this.elementList[i];
         this.elementList.splice(i,1);
-      }      
+      }
     }
     this.reload();
   }

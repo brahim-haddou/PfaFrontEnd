@@ -18,10 +18,6 @@ export class LoginCardService {
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   @Output() username: EventEmitter<string> = new EventEmitter();
 
-  refreshTokenPayload = {
-    refreshToken: this.getRefreshToken(),
-    username: this.getUserName()
-  };
 
   constructor(private httpClient: HttpClient,
               private localStorage: LocalStorageService) {
@@ -52,21 +48,35 @@ export class LoginCardService {
 
   // tslint:disable-next-line:typedef
   refreshToken() {
+    const refreshTokenPayload = {
+      refreshToken: this.getRefreshToken(),
+      username: this.getUserName()
+    };
+
+    console.log(refreshTokenPayload);
     return this.httpClient.post<LoginResponse>(`${this._url}refresh/token`,
-      this.refreshTokenPayload)
+      refreshTokenPayload)
       .pipe(tap(response => {
         this.localStorage.clear('authenticationToken');
+        this.localStorage.clear('username');
+        this.localStorage.clear('refreshToken');
         this.localStorage.clear('expiresAt');
 
-        this.localStorage.store('authenticationToken',
-          response.authenticationToken);
+        this.localStorage.store('authenticationToken', response.authenticationToken);
+        this.localStorage.store('username', response.username);
+        this.localStorage.store('refreshToken', response.refreshToken);
         this.localStorage.store('expiresAt', response.expiresAt);
       }));
   }
 
   // tslint:disable-next-line:typedef
   logout() {
-    this.httpClient.post(`${this._url}logout`, this.refreshTokenPayload,
+
+    const refreshTokenPayload = {
+      refreshToken: this.getRefreshToken(),
+      username: this.getUserName()
+    };
+    this.httpClient.post(`${this._url}logout`, refreshTokenPayload,
       { responseType: 'text' })
       .subscribe(data => {
         console.log(data);

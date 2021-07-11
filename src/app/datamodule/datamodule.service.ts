@@ -13,7 +13,9 @@ import { Observable } from 'rxjs';
 export class DataModuleService{
   private _url: string = `${environment.apiBaseURL}module`;
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient){
+
+  }
 
   getAllModules(): Observable<Module[]>{
     return this.http.get<Module[]>(this._url);
