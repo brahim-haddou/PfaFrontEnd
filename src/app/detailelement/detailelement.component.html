@@ -29,7 +29,8 @@
   <div>
     <p><b>List des professeur de l'element :</b></p>
     <mat-chip-list>
-      <mat-chip *ngFor= "let classe of profElementList" >{{classe.nom}}</mat-chip>
+      <mat-chip *ngFor= "let prof of profElementList" [removable]="true" [selectable]="true" (removed)="deleteProfFromElement(prof)">{{prof.nom}} <mat-icon matChipRemove>cancel</mat-icon></mat-chip>
+
     </mat-chip-list>
   </div>
     <div class="buttons">

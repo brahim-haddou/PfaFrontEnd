@@ -74,10 +74,11 @@ export class DetailelementComponent implements OnInit {
     );
   }
 
-  deleteProfFromElement(pid: number): void{
-    this.dataElementService.deleteProfesseurElement(Number(this.data.element.id), pid).subscribe(
+  deleteProfFromElement(pid: Prof): void {
+    this.dataElementService.deleteProfesseurElement(Number(this.data.element.id), Number(pid.id)).subscribe(
       request => {
         console.log(request);
+        this.profElementList = this.profElementList.filter(obj => obj !== pid);
         return String;
       },
       (error: HttpErrorResponse) => {
