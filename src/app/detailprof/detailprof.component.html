@@ -1,5 +1,11 @@
 <div class="body">
-    <h2>Detail Professeur</h2>
+    <div style="display: flex; flex-direction: row; width: 100%; height: fit-content;">
+        <h2>Detail Professeur</h2>
+        <div style="flex: 1 0 auto;"></div>
+        <button mat-mini-fab color="primary" style="height: fit-content; font-size: smaller; width: 40px;" (click)="save()">
+            <mat-icon>save</mat-icon>
+        </button>
+    </div>
     <mat-form-field appearance="standard">
         <label><b>Nom :</b></label>
         <input matInput placeholder="Modifier le nom complet du professeur" [(ngModel)]="data.prof.nom"

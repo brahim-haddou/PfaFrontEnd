@@ -80,8 +80,8 @@ export class LogincardComponent implements OnInit {
       this.loginCardService.login(this.loginRequestPayload).subscribe(
         data => {
           console.log(data);
-          this.router.navigate(['/data']);
           this.toastr.success('Login Successful');
+          location.reload();
         },
         error => {
           console.log(error);
@@ -95,7 +95,7 @@ export class LogincardComponent implements OnInit {
   // tslint:disable-next-line:typedef
   logout(){
     this.loginCardService.logout();
-    this.router.navigate(['/']);
     this.toastr.success('You Are Logged out');
+    location.reload();
   }
 }

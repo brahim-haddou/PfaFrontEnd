@@ -42,7 +42,8 @@ export class LoggedInToolbarComponent implements OnInit {
   // tslint:disable-next-line:typedef
   logout(){
     this.loginCardService.logout();
-    this.router.navigate(['/']);
     this.toastr.success('You Are Logged out');
+    this.router.navigate(['/']);
+    location.reload();
   }
 }

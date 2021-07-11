@@ -15,12 +15,12 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class DetailclasseComponent implements OnInit {
 
   classe!: Classe;
-  elementList!: Element[];
+  elementList: Element[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {classe: Classe},private dataClasseService: DataClasseService ,private dataElementService: DataElementService, private dialogRef: MatDialogRef<DetailclasseComponent>) { }
 
   ngOnInit(): void {
-    this.getAllElements();
+    //this.getAllElements();
   }
 
   submit(): void {

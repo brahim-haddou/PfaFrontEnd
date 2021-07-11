@@ -14,12 +14,14 @@
         <input matInput placeholder="Entez le nombre maximum des etudiants" [(ngModel)]="data.classe.maxEtudiant"
         [ngModelOptions]="{standalone: true}" type="number" >
     </mat-form-field>
+    <!--
     <mat-form-field appearance="fill" class="selection">
         <mat-label><b>Selectioner l'element :</b></mat-label>
         <mat-select [(value)]="data.classe.elementId" >
           <mat-option *ngFor= "let element of elementList" value="{{element.id}}">{{element.nom}}</mat-option>
         </mat-select>
     </mat-form-field>
+    -->
     <div class="buttons">
         <button mat-flat-button color="primary" (click)="submit()">Modifier</button>
         <button mat-flat-button color="alert" (click)="close()">Annuler</button>

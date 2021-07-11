@@ -22,6 +22,10 @@ export class DetailprofComponent implements OnInit {
     this.getProfesseurElements(this.data.prof);
   }
 
+  save(): void {
+    
+  }
+
   submit(): void {
     this.prof = {id: this.data.prof.id ,nom: this.data.prof.nom};
     this.updateProfesseur(this.prof);

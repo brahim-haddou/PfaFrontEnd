@@ -1,18 +1,26 @@
 <div class="body">
-    <h2>Detail Element</h2>
+    <h2>Detail Elément</h2>
     <mat-form-field appearance="standard">
         <label><b>Nom :</b></label>
-        <input matInput placeholder="Modifier le nom du l'element" [(ngModel)]="data.element.nom"
+        <input matInput placeholder="Modifier le nom du l'elément" [(ngModel)]="data.element.nom"
         [ngModelOptions]="{standalone: true}" >
     </mat-form-field>
-    <mat-form-field appearance="fill" class="selection">
-        <mat-label><b>Selectioner le module :</b></mat-label>
-        <mat-select [(value)]="data.element.moduleId" >
+    <!--<mat-form-field appearance="fill" class="selection">
+        <mat-label><b>Selectioner un professeur :</b></mat-label>
+        <mat-select [(value)]="selectedProf" >
           <mat-option *ngFor= "let module of moduleList" value="{{module.id}}">{{module.nom}}</mat-option>
         </mat-select>
-    </mat-form-field>
+    </mat-form-field>-->
+
+    <mat-form-field appearance="fill">
+        <mat-label>Selectioner les professeurs de l'élément</mat-label>
+        <mat-select [formControl]="objectCtrl" multiple>
+          <mat-option *ngFor="let object of moduleList" [value]="object">{{object.nom}}</mat-option>
+        </mat-select>
+      </mat-form-field>      
+
     <div>
-        <p><b>List des classes du l'element :</b></p>
+         <p><b>List des classes du l'element :</b></p>
         <mat-chip-list>
             <mat-chip *ngFor= "let classe of classeList">{{classe.nom}}</mat-chip>
         </mat-chip-list>          

@@ -20,6 +20,10 @@ export class DetailsalleComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  save(): void{
+    
+  }
+
   submit(): void {
     this.salle = {id: this.data.salle.id, nom: this.data.salle.nom,type : this.data.salle.type,maxPlace : this.data.salle.maxPlace};
     this.updateSalle(this.salle);

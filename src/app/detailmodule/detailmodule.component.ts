@@ -16,14 +16,14 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class DetailmoduleComponent implements OnInit {
 
   module!: Module;
-  filiereList!: Filiere[];
+  filiereList: Filiere[] = [];
   elementList!: Element[];
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: {module: Module},private dataModuleService: DataModuleService ,private datafiliereService: DatafiliereService, private dialogRef: MatDialogRef<DetailmoduleComponent>) { }
 
   ngOnInit(): void {
     this.getElements();
-    this.getAllFilieres();
+    //this.getAllFilieres();
   }
 
   submit(): void {

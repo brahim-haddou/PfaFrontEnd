@@ -5,7 +5,7 @@
             <div class="container">
                 <mat-form-field class="field" appearance="standard" floatLabel="always">
                     <mat-label>Username</mat-label>
-                    <input matInput type="email" placeholder="Type your Username" [(ngModel)]="usernameSin">
+                    <input matInput type="text" placeholder="Type your Username" [(ngModel)]="usernameSin">
                     <mat-icon matPrefix>person</mat-icon>
                 </mat-form-field>
                 <mat-form-field class="field" appearance="standard" floatLabel="always">
@@ -13,8 +13,7 @@
                     <mat-label>Password</mat-label>
                     <input matInput type="password" placeholder="Type your Password" [(ngModel)]="passSin">
                 </mat-form-field>
-                <div id="passforget" class="field"><a href="https://www.google.com/" target="_blank">Forgot Password ?</a></div>
-                <button mat-flat-button color="accent" class="field" (click)="login()">Sign in</button>
+                <button mat-flat-button color="accent"  type="submit" class="field" (click)="login()">Sign in</button>
             </div>
         </mat-tab>
         <mat-tab label="Sign up">
@@ -45,8 +44,7 @@
                     <mat-label>Confirm your Password</mat-label>
                     <input matInput type="password" placeholder="Re-enter your Password" [(ngModel)]="passconfSup">
                 </mat-form-field>
-                <button mat-flat-button color="accent" class="field" (click)="signup()">Sign up</button>
-                <button mat-flat-button color="accent" class="field" (click)="logout()">Sign up</button>
+                <button mat-flat-button color="accent" type="submit" class="field" (click)="signup()">Sign up</button>
             </div>
         </mat-tab>
     </mat-tab-group>
