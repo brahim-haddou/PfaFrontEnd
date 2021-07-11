@@ -13,9 +13,16 @@
     </mat-form-field>
     <div>
         <p><b>List des élements du professeur :</b></p>
-        <mat-chip-list>
-            <mat-chip *ngFor= "let element of elementList">{{element.nom}}</mat-chip>
-        </mat-chip-list>          
+      <mat-chip-list>
+        <mat-chip
+          *ngFor= "let prof of elementList"
+          [removable]="true" [selectable]="true"
+          (removed)="deleteElementFromProf(prof)"
+        >
+          {{prof.nom}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
     </div>
     <div class="buttons">
         <button mat-flat-button color="primary" (click)="submit()">Modifier</button>

@@ -4,6 +4,7 @@ import { Prof } from '../DBModels/prof.model';
 import { Element } from '../DBModels/element.model';
 import {HttpErrorResponse} from '@angular/common/http';
 import {DataprofService} from '../dataprof/dataprof.service';
+import {DataElementService} from '../dataelement/dataelement.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -16,7 +17,9 @@ export class DetailprofComponent implements OnInit {
   prof!: Prof;
   elementList!: Element[];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {prof: Prof},private dataprofService: DataprofService, private dialogRef: MatDialogRef<DetailprofComponent>) { }
+  // @ts-ignore
+  // tslint:disable-next-line:max-line-length
+  constructor(@Inject(MAT_DIALOG_DATA) public data: {prof: Prof}, private dataElementService: DataElementService, private dataprofService: DataprofService, private dialogRef: MatDialogRef<DetailprofComponent>) { }
 
   ngOnInit(): void {
     this.getProfesseurElements(this.data.prof);
@@ -60,4 +63,16 @@ export class DetailprofComponent implements OnInit {
     );
   }
 
+  deleteElementFromProf(elem: Element): void {
+    this.dataElementService.deleteProfesseurElement(Number(elem.id), Number(this.data.prof.id)).subscribe(
+        (request: any) => {
+        console.log(request);
+        this.elementList = this.elementList.filter(obj => obj !== elem);
+        return String;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
 }
