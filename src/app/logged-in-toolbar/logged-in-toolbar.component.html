@@ -3,17 +3,16 @@
 <button class="sm-link" mat-button>Contact us</button>
 <span class="example-spacer"></span>
 <div class="modified-mc-content">
-    <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
+    <mat-expansion-panel [(expanded)]="expand">
+        <mat-expansion-panel-header >
+          <mat-panel-title >
             Liste des emplois du temps
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-list-item class="liste-item" *ngFor= "let element of listFIliere">
-          <button mat-button *ngIf="show" class="liste-button" routerLink="build/{{element.id}}" >{{element.nom}}</button>
+        <mat-list-item  class="liste-item" *ngFor= "let element of listFIliere">
+          <button mat-button *ngIf="show" class="liste-button"  (click)="closeExpand(element.id)">{{element.nom}}</button>
         </mat-list-item>
     </mat-expansion-panel>
 </div>
-<button mat-flat-button color="primary" id="newtt" routerLink="/data">Crée un emploi du temps</button>
+<button mat-flat-button color="primary" id="newtt" routerLink="/data">Gestionnaire Des Donnees</button>
 <button mat-flat-button color="warn" id="newt" (click)="logout()">logout</button>
-<!--<app-userbutton></app-userbutton>-->

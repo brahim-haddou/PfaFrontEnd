@@ -12,19 +12,27 @@ import {Router} from '@angular/router';
 })
 export class LoggedInToolbarComponent implements OnInit {
 
+  // @ts-ignore
+  // tslint:disable-next-line:max-line-length
+  constructor(private datafiliereService: DatafiliereService, private loginCardService: LoginCardService, private router: Router, private toastr: ToastrService) { }
+
   listFIliere!: Filiere[];
   public show = true;
 
-  // @ts-ignore
-  constructor(private datafiliereService: DatafiliereService, private loginCardService: LoginCardService, private router: Router,private toastr: ToastrService) { }
+  // tslint:disable-next-line:typedef
+  expand: boolean = false;
 
   ngOnInit(): void {
     this.getAllFilieres();
   }
 
   reload() {
-    this.show = false;
+    this.show = true;
     setTimeout(() => this.show = true);
+  }
+  closeExpand(id: number | undefined): void {
+    this.router.navigate([`build/${Number(id)}`]);
+    this.expand = false;
   }
 
   public getAllFilieres(){
@@ -38,8 +46,6 @@ export class LoggedInToolbarComponent implements OnInit {
         }
       );
   }
-
-  // tslint:disable-next-line:typedef
   logout(){
     this.loginCardService.logout();
     this.toastr.success('You Are Logged out');
